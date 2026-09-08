@@ -1,0 +1,32 @@
+selftest ok
+
+=== qwen3:4b  (num_ctx=8192, n=4) ===
+  api-01   ok   13.6s   4c  ac=50% types=100%
+  auth-01  ok   12.6s   4c  ac=100% types=100%
+  form-01  ok   17.2s   6c  ac=100% types=100%
+  mig-01   ok   17.4s   5c  ac=100% types=100%
+  -> validity=100% ac=0.875 types=1.0 p50=17.2s p95=17.4s
+  -> NAME        ID              SIZE      PROCESSOR    CONTEXT    UNTIL              
+qwen3:4b    359d7dd4bcda    3.9 GB    100% GPU     8192       4 minutes from now
+
+=== gemma3:4b  (num_ctx=8192, n=4) ===
+  api-01   ok  115.1s   6c  ac=100% types=100%
+  auth-01  ok   18.0s   5c  ac=100% types=100%
+  form-01  ok   20.2s   5c  ac=100% types=100%
+  mig-01   ok   21.0s   5c  ac=100% types=100%
+  -> validity=100% ac=1.0 types=1.0 p50=21.0s p95=115.1s
+  -> NAME         ID              SIZE      PROCESSOR    CONTEXT    UNTIL              
+gemma3:4b    a2af6cc3eb7f    2.9 GB    100% GPU     8192       4 minutes from now
+
+=== phi4-mini  (num_ctx=8192, n=4) ===
+  api-01   ok   25.7s   4c  ac=100% types=100%
+  auth-01  ok    9.4s   3c  ac=100% types=67%
+  form-01  ok   10.7s   4c  ac=100% types=100%
+  mig-01   ok   15.1s   5c  ac=100% types=100%
+  -> validity=100% ac=1.0 types=0.917 p50=15.1s p95=25.7s
+  -> NAME                ID              SIZE      PROCESSOR    CONTEXT    UNTIL              
+phi4-mini:latest    78fad5d182a7    3.6 GB    100% GPU     8192       4 minutes from now
+
+=== qwen3:8b  (num_ctx=8192, n=4) ===
+
+[killed]
