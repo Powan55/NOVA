@@ -84,6 +84,7 @@ There is no administrative user class in the initial release.
 | CON-4 | Deployment is local only | Project decision |
 | CON-5 | Synthetic and open-source data only | Project decision |
 | CON-6 | No model fine-tuning | Scope boundary |
+| CON-7 | Single user, with a multi-tenant-capable schema | Project decision |
 
 ### 1.4 Definitions, acronyms, and abbreviations
 

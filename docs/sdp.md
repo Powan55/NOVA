@@ -31,6 +31,7 @@ in [NOVA-VS-001 section 1.3](vision-and-scope.md#13-business-objectives-and-succ
 | CON-4 | Local deployment only | Container composition is the deployment artifact |
 | CON-5 | Synthetic and open-source data only | Evaluation data is committable |
 | CON-6 | No model training | Adaptation through retrieval and configuration only |
+| CON-7 | Single user, multi-tenant-capable schema | Tenant identifier present from the first migration |
 
 **Deliverables.**
 

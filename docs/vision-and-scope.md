@@ -163,6 +163,7 @@ Ordered by anticipated value relative to effort.
 | CON-4 | Local deployment only | Project decision |
 | CON-5 | Synthetic and open-source data only | Project decision |
 | CON-6 | No model fine-tuning in the initial release | Scope boundary |
+| CON-7 | Single user, with a multi-tenant-capable schema | Project decision |
 
 ## 4. Business context
 
