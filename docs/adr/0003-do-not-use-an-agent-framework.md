@@ -6,7 +6,7 @@ consulted: none
 informed: none
 ---
 
-# No agent framework
+# Do not use an agent framework
 
 ## Context and problem statement
 

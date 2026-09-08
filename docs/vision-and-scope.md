@@ -109,7 +109,7 @@ reasoning behind each output, and measures whether corrections stop recurring**.
 | DEP-2 | Local model weights | Five candidates retrieved, approximately 18 GB |
 | DEP-3 | PostgreSQL with the pgvector extension | Not provisioned |
 | DEP-4 | Container runtime | Installed, daemon not running |
-| DEP-5 | Local embedding model | Not selected. Blocking, see [ADR-0005](adr/0005-embedding-model-and-vector-dimension.md) |
+| DEP-5 | Local embedding model | Not selected. Blocking, see [ADR-0005](adr/0005-select-an-embedding-model-and-vector-dimension.md) |
 
 ## 3. Scope and limitations
 

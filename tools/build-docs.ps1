@@ -118,11 +118,15 @@ function Convert-Source([System.IO.FileInfo]$file, [string]$stem) {
 
 $built = @()
 foreach ($src in $sources) {
-    $stem = [System.IO.Path]::GetFileNameWithoutExtension($src.Name)
-    if ($src.Directory.Name -ne 'docs') { $stem = "$($src.Directory.Name)-$stem" }
+    $name = [System.IO.Path]::GetFileNameWithoutExtension($src.Name)
+    # Mirror the source folder structure under dist/ rather than flattening with a prefix.
+    $subdir = if ($src.Directory.Name -eq 'docs') { '' } else { $src.Directory.Name }
+    $outDir = if ($subdir) { Join-Path $dist $subdir } else { $dist }
+    New-Item -ItemType Directory -Force -Path $outDir | Out-Null
 
+    $stem = if ($subdir) { "$subdir-$name" } else { $name }   # temp files stay unique
     $prepared = Convert-Source $src $stem
-    $docx = Join-Path $dist "$stem.docx"
+    $docx = Join-Path $outDir "$name.docx"
 
     $args = @(
         $prepared
@@ -136,10 +140,20 @@ foreach ($src in $sources) {
     if (Test-Path $reference) { $args += @('--reference-doc', $reference) }
 
     & $pandoc @args
-    if ($LASTEXITCODE -ne 0) { throw "pandoc failed on $($src.Name)" }
+    if ($LASTEXITCODE -ne 0) {
+        # The usual cause is a hidden Word instance still holding the file, left behind when a
+        # previous run was interrupted before its COM cleanup ran.
+        $orphans = @(Get-Process WINWORD -ErrorAction SilentlyContinue | Where-Object { $_.MainWindowHandle -eq 0 })
+        if ($orphans) {
+            Write-Warning ("{0} hidden Word instance(s) are running and may be holding output files open." -f $orphans.Count)
+            Write-Warning "Close them with: Get-Process WINWORD | Where-Object { `$_.MainWindowHandle -eq 0 } | Stop-Process"
+            Write-Warning "This does not affect Word windows you have open yourself."
+        }
+        throw "pandoc failed on $($src.Name)"
+    }
 
     $built += [pscustomobject]@{ Source = $src.Name; Docx = $docx; Pdf = $null }
-    Write-Host "  docx  $stem.docx"
+    Write-Host ("  docx  " + (Resolve-Path -Relative $docx))
 }
 
 if ($Format -in 'pdf', 'all') {
@@ -163,7 +177,7 @@ if ($Format -in 'pdf', 'all') {
                     if ($doc.TablesOfContents.Count -gt 0) { $doc.TablesOfContents.Item(1).Update() }
                     $doc.SaveAs([ref]$pdf, [ref]17)   # 17 = wdFormatPDF
                     $item.Pdf = $pdf
-                    Write-Host "  pdf   $(Split-Path -Leaf $pdf)"
+                    Write-Host ("  pdf   " + (Resolve-Path -Relative $pdf))
                 }
                 finally { $doc.Close([ref]0) }
             }
@@ -175,7 +189,7 @@ if ($Format -in 'pdf', 'all') {
     }
 }
 
-if ($Format -eq 'pdf') { Get-ChildItem $dist -Filter '*.docx' | Remove-Item -Force }
+if ($Format -eq 'pdf') { Get-ChildItem $dist -Filter '*.docx' -Recurse | Remove-Item -Force }
 
 Remove-Item $work -Recurse -Force -ErrorAction SilentlyContinue
 

@@ -111,16 +111,16 @@ Services bind to the loopback interface. The system has no inbound network surfa
 
 | Quality goal | Approach | Rationale |
 |---|---|---|
-| Security of the memory path | Two independent controls in series: a mechanical validation screen, then mandatory human confirmation. Combined with a total absence of tool capability for the model | A screen against an open-ended attack surface will miss cases. A successful injection can produce a poor test case but cannot take an action, because no action exists. See [ADR-0004](adr/0004-human-confirmation-for-memory-writes.md) |
+| Security of the memory path | Two independent controls in series: a mechanical validation screen, then mandatory human confirmation. Combined with a total absence of tool capability for the model | A screen against an open-ended attack surface will miss cases. A successful injection can produce a poor test case but cannot take an action, because no action exists. See [ADR-0004](adr/0004-require-human-confirmation-for-memory-writes.md) |
 | Analysability | Trace steps written incrementally, including retrieval scores for candidates that were evaluated and rejected | A trace persisted only on success is useless, because failure is when it is needed. Scores for non-selected candidates are what separate retrieval failure from generation failure |
 | Testability | Deterministic checks first, model-based review confined to the residual. Evaluation dataset versioned by content hash. Configuration activation blocked at the data layer without a passing run | Model-based evaluation makes every metric dependent on a component whose reliability must itself be established |
 | Confidentiality | Local inference by default. Provider changes require explicit user action. Logs carry identifiers and digests, never content | Automatic provider substitution would silently change where data goes |
 | Reliability | Durable job records claimed under row-level locks with lease expiry. Every retry bounded with a defined terminal state | An agent that retries without bound consumes a GPU and presents as a hang |
 
 Technology selection follows from the constraints rather than preference: a single datastore holding
-both relational and vector data ([ADR-0001](adr/0001-postgres-pgvector-as-sole-datastore.md)), a job
-table rather than a broker ([ADR-0002](adr/0002-postgres-job-table-for-async-execution.md)), and no
-agent framework ([ADR-0003](adr/0003-no-agent-framework.md)).
+both relational and vector data ([ADR-0001](adr/0001-use-postgres-with-pgvector-as-sole-datastore.md)), a job
+table rather than a broker ([ADR-0002](adr/0002-use-a-postgres-job-table-for-async-execution.md)), and no
+agent framework ([ADR-0003](adr/0003-do-not-use-an-agent-framework.md)).
 
 ## 5. Building block view
 
@@ -477,11 +477,11 @@ Significant decisions are recorded as ADRs in MADR 4.0 format. Remaining decisio
 
 | ADR | Decision | Status |
 |---|---|---|
-| [0001](adr/0001-postgres-pgvector-as-sole-datastore.md) | PostgreSQL with pgvector as the sole datastore | Accepted |
-| [0002](adr/0002-postgres-job-table-for-async-execution.md) | Job table and polling worker rather than a message broker | Accepted |
-| [0003](adr/0003-no-agent-framework.md) | No agent framework | Accepted |
-| [0004](adr/0004-human-confirmation-for-memory-writes.md) | Mandatory human confirmation for memory writes | Accepted |
-| [0005](adr/0005-embedding-model-and-vector-dimension.md) | Embedding model and vector dimension | Proposed |
+| [0001](adr/0001-use-postgres-with-pgvector-as-sole-datastore.md) | PostgreSQL with pgvector as the sole datastore | Accepted |
+| [0002](adr/0002-use-a-postgres-job-table-for-async-execution.md) | Job table and polling worker rather than a message broker | Accepted |
+| [0003](adr/0003-do-not-use-an-agent-framework.md) | No agent framework | Accepted |
+| [0004](adr/0004-require-human-confirmation-for-memory-writes.md) | Mandatory human confirmation for memory writes | Accepted |
+| [0005](adr/0005-select-an-embedding-model-and-vector-dimension.md) | Embedding model and vector dimension | Proposed |
 
 ## 10. Quality requirements
 

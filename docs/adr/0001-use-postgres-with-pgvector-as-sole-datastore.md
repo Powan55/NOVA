@@ -6,7 +6,7 @@ consulted: none
 informed: none
 ---
 
-# PostgreSQL with pgvector as the sole datastore
+# Use PostgreSQL with pgvector as the sole datastore
 
 ## Context and problem statement
 
@@ -56,7 +56,7 @@ logic exceeding the size of the retrieval layer it protects.
   rebuild duration grows with corpus size. Neither binds at the expected scale
 * Bad, because the vector dimension becomes a fixed column type. Changing the embedding model later
   requires re-embedding every memory and rebuilding the index. See
-  [ADR-0005](0005-embedding-model-and-vector-dimension.md)
+  [ADR-0005](0005-select-an-embedding-model-and-vector-dimension.md)
 
 ### Confirmation
 
@@ -94,5 +94,5 @@ measured problem rather than a presumed one.
 
 ## More information
 
-Related: [ADR-0002](0002-postgres-job-table-for-async-execution.md) depends on this choice, since the
+Related: [ADR-0002](0002-use-a-postgres-job-table-for-async-execution.md) depends on this choice, since the
 job table shares the same datastore and therefore the same transaction as task creation.

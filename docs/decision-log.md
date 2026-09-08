@@ -67,7 +67,7 @@ of the project.
 | DL-023 | Specific model and quantization | Open | At a sample of four per model, one candidate leads on content quality, another on latency, a third is weakest on coverage | A sample of four cannot separate them. Decide following the complete run |
 | DL-024 | Single-stage constrained generation rather than reason-then-structure | Provisional | Structural conformance was complete at single stage across every measured candidate | Revisit only if content quality proves weak on the complete run. Two-stage generation costs an additional inference call |
 | DL-025 | Thinking disabled on hybrid reasoning models | Accepted | Required for one candidate family. Reasoning tokens dominate generation duration and interact poorly with constrained decoding | A configuration requirement, not an optimization |
-| DL-026 | Embedding model and vector dimension | Open, blocking | None | Recorded as [ADR-0005](adr/0005-embedding-model-and-vector-dimension.md). Requires a dedicated spike before schema definition |
+| DL-026 | Embedding model and vector dimension | Open, blocking | None | Recorded as [ADR-0005](adr/0005-select-an-embedding-model-and-vector-dimension.md). Requires a dedicated spike before schema definition |
 | DL-027 | Whether the 8B class fits within the VRAM budget | Open | Two candidates retrieved, neither measured | Measure residency and offload distribution |
 | DL-028 | Duplicate similarity and structural similarity thresholds | Open | None | Derive from measured distributions, then fix |
 
@@ -75,11 +75,11 @@ of the project.
 
 | ADR | Decision | Status |
 |---|---|---|
-| [0001](adr/0001-postgres-pgvector-as-sole-datastore.md) | PostgreSQL with pgvector as the sole datastore | Accepted |
-| [0002](adr/0002-postgres-job-table-for-async-execution.md) | Job table and polling worker rather than a message broker | Accepted |
-| [0003](adr/0003-no-agent-framework.md) | No agent framework | Accepted |
-| [0004](adr/0004-human-confirmation-for-memory-writes.md) | Mandatory human confirmation for memory writes | Accepted |
-| [0005](adr/0005-embedding-model-and-vector-dimension.md) | Embedding model and vector dimension | Proposed |
+| [0001](adr/0001-use-postgres-with-pgvector-as-sole-datastore.md) | PostgreSQL with pgvector as the sole datastore | Accepted |
+| [0002](adr/0002-use-a-postgres-job-table-for-async-execution.md) | Job table and polling worker rather than a message broker | Accepted |
+| [0003](adr/0003-do-not-use-an-agent-framework.md) | No agent framework | Accepted |
+| [0004](adr/0004-require-human-confirmation-for-memory-writes.md) | Mandatory human confirmation for memory writes | Accepted |
+| [0005](adr/0005-select-an-embedding-model-and-vector-dimension.md) | Embedding model and vector dimension | Proposed |
 
 ## 7. Traceability
 

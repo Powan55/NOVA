@@ -6,7 +6,7 @@ consulted: none
 informed: none
 ---
 
-# Mandatory human confirmation for memory writes
+# Require human confirmation for memory writes
 
 ## Context and problem statement
 

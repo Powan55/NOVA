@@ -6,7 +6,7 @@ consulted: none
 informed: none
 ---
 
-# Job table and polling worker rather than a message broker
+# Use a job table and polling worker rather than a message broker
 
 ## Context and problem statement
 
@@ -97,5 +97,5 @@ requirements.
 
 ## More information
 
-Depends on [ADR-0001](0001-postgres-pgvector-as-sole-datastore.md), which establishes PostgreSQL as
+Depends on [ADR-0001](0001-use-postgres-with-pgvector-as-sole-datastore.md), which establishes PostgreSQL as
 the sole datastore and therefore makes the transactional enqueue property available.

@@ -6,7 +6,7 @@ consulted: none
 informed: none
 ---
 
-# Embedding model and vector dimension
+# Select an embedding model and vector dimension
 
 ## Context and problem statement
 
@@ -95,6 +95,6 @@ spike: stated method, raw output, sample size, and limitations.
 
 ## More information
 
-Related: [ADR-0001](0001-postgres-pgvector-as-sole-datastore.md) establishes why the dimension
+Related: [ADR-0001](0001-use-postgres-with-pgvector-as-sole-datastore.md) establishes why the dimension
 resides in the schema. Tracked as R-04 in [NOVA-RR-001](../risk-register.md) and as G1 in
 [NOVA-SDP-001 section 5.6](../sdp.md#56-entry-criteria-for-implementation).

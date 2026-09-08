@@ -8,11 +8,11 @@ rationale must survive later pressure to undo it. Decisions not meeting that bar
 
 | ADR | Decision | Status | Date |
 |---|---|---|---|
-| [0001](0001-postgres-pgvector-as-sole-datastore.md) | PostgreSQL with pgvector as the sole datastore | Accepted | 2026-09-07 |
-| [0002](0002-postgres-job-table-for-async-execution.md) | Job table and polling worker rather than a message broker | Accepted | 2026-09-07 |
-| [0003](0003-no-agent-framework.md) | No agent framework | Accepted | 2026-09-07 |
-| [0004](0004-human-confirmation-for-memory-writes.md) | Mandatory human confirmation for memory writes | Accepted | 2026-09-07 |
-| [0005](0005-embedding-model-and-vector-dimension.md) | Embedding model and vector dimension | Proposed | 2026-09-07 |
+| [0001](0001-use-postgres-with-pgvector-as-sole-datastore.md) | PostgreSQL with pgvector as the sole datastore | Accepted | 2026-09-07 |
+| [0002](0002-use-a-postgres-job-table-for-async-execution.md) | Job table and polling worker rather than a message broker | Accepted | 2026-09-07 |
+| [0003](0003-do-not-use-an-agent-framework.md) | No agent framework | Accepted | 2026-09-07 |
+| [0004](0004-require-human-confirmation-for-memory-writes.md) | Mandatory human confirmation for memory writes | Accepted | 2026-09-07 |
+| [0005](0005-select-an-embedding-model-and-vector-dimension.md) | Embedding model and vector dimension | Proposed | 2026-09-07 |
 
 ## Conventions
 

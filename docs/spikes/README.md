@@ -11,7 +11,7 @@ implementation. Each produces a report with a stated method, raw output, and lim
 
 | Spike | Resolves | Blocking |
 |---|---|---|
-| Embedding model and vector dimension | [ADR-0005](../adr/0005-embedding-model-and-vector-dimension.md), R-04 | Yes. Blocks schema definition |
+| Embedding model and vector dimension | [ADR-0005](../adr/0005-select-an-embedding-model-and-vector-dimension.md), R-04 | Yes. Blocks schema definition |
 | Container-to-host inference reachability | R-09 | No, but it is the most probable early impediment |
 
 ## Conventions
