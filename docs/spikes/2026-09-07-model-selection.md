@@ -1,11 +1,15 @@
-# Spike: picking a local model under a 6 GB VRAM ceiling
+# Spike Report: local model selection under a 6 GB VRAM ceiling
 
-| | |
+| Field | Value |
 |---|---|
+| Document ID | NOVA-SPK-001 |
+| Version | 1.0 |
+| Status | Partial |
+| Owner | Laxmi Poudel |
 | Date | 2026-09-07 |
-| Status | Partial. Three of five candidates measured, stopped before the two 8B ones |
-| Question | Can a local model hold NOVA's test-plan JSON schema, on this machine, at usable latency? |
-| Answer | Yes for 4B-class. 12 of 12 schema-valid, fully on GPU, 9 to 26 s warm. 8B unmeasured |
+| Question | Can a local model hold NOVA's test plan JSON schema, on this hardware, at usable latency? |
+| Answer | Yes for the 4B-parameter class. 12 of 12 schema-conformant, fully GPU-resident, 9 to 26 s warm. The 8B class is unmeasured |
+| Decisions affected | DL-021, DL-022, DL-023, DL-024, DL-025 |
 
 ## Why this ran first
 

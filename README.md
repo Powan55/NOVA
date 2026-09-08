@@ -1,65 +1,88 @@
 # NOVA
 
-A local agent that turns a requirement into a structured test plan, then uses your corrections so it
-stops making the same mistakes. Corrections become memory rows you can read, edit, and delete.
+A locally hosted agent that converts software requirements into structured test plans, and retains
+your corrections as inspectable memory so it stops repeating the same mistakes.
 
-Everything runs on a local model by default, so nothing leaves the machine.
+Inference runs on a local model by default. No requirement or test data leaves the machine.
 
-**Status: planning.** Docs and one research spike. No app code yet.
+**Status: planning.** Document set and one research spike. No application code yet.
 
-## Docs
+---
 
-| Doc | What's in it |
+## The problem
+
+Generating test cases from a requirement is something current models already do competently.
+Retaining a team's conventions between sessions is not.
+
+You tell an assistant to include an unauthenticated case for every endpoint. It does. Next session
+you tell it again. The generation was never the expensive part; restating context indefinitely is.
+
+The usual mitigation is a long system prompt, which is unversioned, unmeasured, and degrades quietly
+as it grows. It also offers no way to answer whether output is actually improving.
+
+## The approach
+
+Each correction is extracted into a rule carrying provenance and a confidence score. Relevant rules
+are retrieved per task and the applied ones are shown with their scores. Whether corrections stop
+recurring is tracked as a metric, and prompt or configuration changes must pass a regression suite
+before they take effect.
+
+Adaptation happens through retrieval and configuration, not weights. NOVA does not fine-tune or
+retrain any model. [What that covers and where it stops](docs/vision-and-scope.md#22-major-features).
+
+## Documentation
+
+| Document | Contents |
 |---|---|
-| [Project brief](docs/00-project-brief.md) | The problem, who it's for, scope and non-goals |
-| [Requirements](docs/01-prd.md) | Personas, journeys, functional and non-functional requirements, acceptance criteria |
-| [Technical design](docs/02-technical-design.md) | Architecture, components, data flow, contracts, failure modes |
-| [Test strategy](docs/03-test-strategy.md) | Test pyramid, evaluation dataset, metrics, CI gates |
-| [Security and privacy](docs/04-security-privacy.md) | Threat model, trust boundaries, controls |
-| [Delivery plan](docs/05-delivery-plan.md) | Milestones, vertical slices, cut order |
-| [Decision log](docs/06-decision-log.md) | What was decided, what was rejected, why |
-| [Risk register](docs/07-risk-register.md) | Open risks and what closes them |
-| [Readiness](docs/08-readiness-checklist.md) | What's done and what's still missing before I start building |
-| [ADRs](docs/adr/) | The decisions that needed more than a table row |
-| [Spikes](docs/spikes/) | Research spikes with real numbers |
+| [Vision and Scope](docs/vision-and-scope.md) | Problem, objectives, scope, exclusions |
+| [Requirements](docs/srs.md) | Functional and non-functional requirements, verification matrix |
+| [Architecture](docs/architecture.md) | Context, building blocks, runtime, deployment, crosscutting concerns |
+| [Test Plan](docs/test-plan.md) | Strategy, dataset, metrics, gates |
+| [Threat Model](docs/threat-model.md) | Assets, trust boundaries, threats, residual risk |
+| [Development Plan](docs/sdp.md) | Milestones, slices, acceptance criteria |
+| [Risk Register](docs/risk-register.md) | Active and closed risks |
+| [Decision Log](docs/decision-log.md) | Decisions, alternatives, revisit triggers |
+| [Architecture Decision Records](docs/adr/) | The decisions that needed more than a table row |
+| [Spike Reports](docs/spikes/) | Investigations with raw data |
 
-Short version for anyone skimming: [project brief](docs/00-project-brief.md), then the
-[model spike](docs/spikes/2026-09-07-model-selection.md).
+Full index and conventions: [docs/README.md](docs/README.md).
 
-## The idea
+Distributable DOCX and PDF are generated from these sources into [`docs/dist/`](docs/dist/).
 
-Generating test cases from a requirement is something LLMs already do fine. Remembering how *your
-team* writes tests is what they don't do.
+## What has been measured
 
-You tell an assistant "always add an unauthenticated case for any endpoint". It does. Next session
-you tell it again. And again. The generation was never the expensive part. Re-explaining yourself
-every time is.
+One spike. Everything else in the document set is reasoning, not evidence.
 
-The usual fix is a long system prompt, which is unversioned, unmeasured, and quietly ignored as it
-grows. Nobody can answer whether it's actually getting better.
+| Finding | Detail |
+|---|---|
+| A local model holds the test plan schema | 12 of 12 valid on first attempt across three candidates |
+| The 4B-parameter class fits the hardware | 2.9 to 3.9 GB resident at 8K context, fully GPU-offloaded on a 6 GB card |
+| Latency has substantial headroom | 9 to 26 s warm generation, against a 90 s provisional target for the whole pipeline |
+| Cold model load is a separate cost | 115 s cold against 18 to 21 s warm for the same model |
+| The recorded hardware assumption was wrong | 6 GB, not 8 GB. Found before any code was written |
 
-NOVA's answer: pull each correction out as a rule with provenance and a confidence score, retrieve
-the relevant ones per task, show which ones got applied and at what score, and track a metric for
-whether corrections stop recurring. Prompt and config changes have to pass a regression suite before
-they go live.
-
-## What's actually been measured
-
-One spike so far. Everything else in these docs is reasoning, not evidence.
-
-- 4B-class local models held the test-plan JSON schema on 12 of 12 generations, fully on GPU inside
-  6 GB of VRAM, at 9 to 26 seconds warm.
-- The 8 GB VRAM figure I'd written down in planning was wrong. The card is 6 GB. Caught it before
-  writing any code, which cost an afternoon instead of a rewrite later.
-
-Method, raw numbers, and limitations: [model spike](docs/spikes/2026-09-07-model-selection.md).
+Sample size is four requirements per model, which is enough to close the hardware question and not
+enough to select a model. Method, raw output, and limitations:
+[NOVA-SPK-001](docs/spikes/2026-09-07-model-selection.md).
 
 ## On claims
 
-No performance or quality number goes in these docs, a README, or a resume until it's been measured
-and can be reproduced. Anything unmeasured stays as a bracketed placeholder like
-`[measured p95 latency]`. If a placeholder can't be filled, the claim gets deleted rather than
-softened.
+No performance or quality figure appears in this repository until it has been measured and can be
+reproduced. Unmeasured values are bracketed placeholders. **A placeholder that cannot be filled
+becomes a removed claim, not a softened one.**
 
-NOVA does not fine-tune or retrain anything. The [project brief](docs/00-project-brief.md) spells
-out exactly what "learning" covers here and where it stops.
+Measured figures are stated with their method, sample size, and reference hardware. A figure without
+that qualification is not reproducible and is therefore not a claim.
+
+## Building the documents
+
+```powershell
+powershell -File tools/build-docs.ps1
+```
+
+Requires [Pandoc](https://pandoc.org). PDF output additionally requires Microsoft Word. Use
+`-Format docx` to skip PDF generation.
+
+## License
+
+[MIT](LICENSE).
