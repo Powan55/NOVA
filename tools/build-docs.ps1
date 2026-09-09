@@ -70,11 +70,17 @@ $order = @(
     'sdp.md'
     'risk-register.md'
     'decision-log.md'
+    'ui-design.md'
 )
 $sources = @()
 foreach ($f in $order) {
     $p = Join-Path $docs $f
     if (Test-Path $p) { $sources += Get-Item $p }
+}
+# A new top-level document that nobody added to $order would otherwise be skipped silently.
+Get-ChildItem $docs -Filter '*.md' | Where-Object { $order -notcontains $_.Name } | ForEach-Object {
+    Write-Warning "$($_.Name) is not in the ordered list; appending it at the end."
+    $sources += $_
 }
 $sources += Get-ChildItem (Join-Path $docs 'adr') -Filter '*.md' | Sort-Object Name
 $sources += Get-ChildItem (Join-Path $docs 'spikes') -Filter '*.md' | Sort-Object Name

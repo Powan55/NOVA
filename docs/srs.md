@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Document ID | NOVA-SRS-001 |
-| Version | 0.3 |
+| Version | 0.4 |
 | Status | Draft |
 | Owner | Laxmi Poudel |
 | Date | 2026-09-08 |
@@ -276,6 +276,9 @@ qualification.
 Four views: task submission and results, execution trace, memory management, and evaluation results.
 Rendered in a current desktop browser. No mobile layout is provided.
 
+The screen inventory, wireframes, state coverage, and element-to-requirement traceability are in
+[NOVA-UI-001](ui-design.md).
+
 #### 3.4.2 Application programming interfaces
 
 | ID | Requirement | Pri |
@@ -482,3 +485,4 @@ method and the results are recorded.
 | 0.1 | 2026-09-08 | Laxmi Poudel | Initial draft |
 | 0.2 | 2026-09-08 | Laxmi Poudel | CON-7 recorded in the baseline. DEP-5 resolved: embedding model and vector dimension selected |
 | 0.3 | 2026-09-08 | Laxmi Poudel | DEP-2 resolved: generation and embedding models selected by measurement |
+| 0.4 | 2026-09-08 | Laxmi Poudel | Section 3.4.1 points to NOVA-UI-001 |

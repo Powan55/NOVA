@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Document ID | NOVA-SDP-001 |
-| Version | 0.3 |
+| Version | 0.4 |
 | Status | Draft |
 | Owner | Laxmi Poudel |
 | Date | 2026-09-08 |
@@ -72,6 +72,7 @@ rather than applied silently.
 | NOVA-TM-001 | Threat Model |
 | NOVA-RR-001 | Risk Register |
 | NOVA-DL-001 | Decision Log |
+| NOVA-UI-001 | User Interface Design |
 
 ## 3. Definitions
 
@@ -269,7 +270,7 @@ Assessment against the current state of the document set.
 | 4 | Scope, assumptions, constraints, exclusions documented | Complete | [NOVA-VS-001 §3](vision-and-scope.md) |
 | 5 | Functional requirements specified | Complete | [NOVA-SRS-001 §3.1](srs.md) |
 | 6 | Non-functional requirements specified | Complete | [NOVA-SRS-001 §3.2 to §3.12](srs.md) |
-| 7 | User interface design available | **Gap** | Operational scenarios exist. No screen inventory or wireframes. The trace viewer and applied-lessons presentation carry the project's explanatory value and neither is designed |
+| 7 | User interface design available | Complete | [NOVA-UI-001](ui-design.md). Four views and two surfaces, wireframed, with every exception condition in NOVA-SRS-001 §3.5.2 mapped to where it surfaces |
 | 8 | Architecture documented and reviewed | Partial | [NOVA-SAD-001](architecture.md) complete. Reviewed by the author only, per CON-2 |
 | 9 | Alternatives and trade-offs documented | Complete | [ADRs](adr/), [NOVA-DL-001](decision-log.md) |
 | 10 | Data model, ownership, retention, migration understood | Complete | Entities and retention defined. Vector dimension fixed at 768 by [ADR-0005](adr/0005-select-an-embedding-model-and-vector-dimension.md) |
@@ -282,7 +283,7 @@ Assessment against the current state of the document set.
 | 17 | Work decomposed into estimable, demonstrable increments | Complete | Section 6.2 |
 | 18 | Acceptance criteria defined | Complete | Section 6.4 |
 
-Fifteen complete, one partial, two gaps.
+Sixteen complete, one partial, one gap.
 
 **Outstanding items, in order of consequence.**
 
@@ -291,10 +292,10 @@ Fifteen complete, one partial, two gaps.
 | ~~G1~~ | ~~Select the embedding model and fix the vector dimension~~ | ~4 h spent | **Resolved 2026-09-08.** `embeddinggemma` at 768 dimensions, [NOVA-SPK-002](spikes/2026-09-08-embedding-selection.md) and [ADR-0005](adr/0005-select-an-embedding-model-and-vector-dimension.md) |
 | G4 | Verify container-to-host inference reachability and datastore provisioning | ~1 h | Removes the most probable early impediment. Now the only remaining entry condition |
 | ~~G2~~ | ~~Complete the model selection spike across all cases and candidates~~ | ~2 h spent | **Resolved 2026-09-08.** `gemma3:4b` selected, R-08 closed. [NOVA-SPK-001 v1.1](spikes/2026-09-07-model-selection.md) |
-| G3 | Produce a screen inventory and wireframes for the four views | ~4 h | Required before interface work. Does not block foundation or backend work |
+| ~~G3~~ | ~~Produce a screen inventory and wireframes for the four views~~ | ~4 h spent | **Resolved 2026-09-08.** [NOVA-UI-001](ui-design.md) |
 
-G1 and G2 are resolved. G4 is what now stands between the document set and implementation, and G3
-stands between it and interface work.
+G1, G2 and G3 are resolved. G4 is the only entry condition still open, and it needs a running
+container runtime rather than more design.
 
 ## 6. Technical process plans
 
@@ -411,6 +412,7 @@ Defined in [NOVA-STP-001](test-plan.md). Requirement-to-verification traceabilit
 | NOVA-STP-001 Test Plan | Laxmi Poudel | Prior to M2, updated at M5 |
 | NOVA-TM-001 Threat Model | Laxmi Poudel | Prior to M3, updated at M5 |
 | NOVA-SDP-001 SDP | Laxmi Poudel | Every milestone boundary |
+| NOVA-UI-001 UI Design | Laxmi Poudel | Prior to interface work in M2 |
 | ADRs | Laxmi Poudel | At the point of decision |
 | Spike reports | Laxmi Poudel | On completion of each spike |
 
@@ -512,3 +514,4 @@ None of this permits describing the system as self-training before a trained mod
 | 0.1 | 2026-09-08 | Laxmi Poudel | Initial draft |
 | 0.2 | 2026-09-08 | Laxmi Poudel | CON-7 recorded. G1 resolved by NOVA-SPK-002. Entry criterion 10 unblocked. M1 status updated |
 | 0.3 | 2026-09-08 | Laxmi Poudel | G2 resolved by NOVA-SPK-001 v1.1. M1 status updated |
+| 0.4 | 2026-09-08 | Laxmi Poudel | G3 resolved by NOVA-UI-001. Entry criterion 7 closed |

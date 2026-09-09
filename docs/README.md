@@ -15,6 +15,7 @@ requests. Distributable DOCX and PDF are generated from these sources.
 | NOVA-SDP-001 | [Software Development Plan](sdp.md) | ISO/IEC/IEEE 16326:2019 | Draft |
 | NOVA-RR-001 | [Risk Register](risk-register.md) | ISO 31000 risk register practice | Draft |
 | NOVA-DL-001 | [Decision Log](decision-log.md) | Project decision log | Draft |
+| NOVA-UI-001 | [User Interface Design](ui-design.md) | Project convention. Screen inventory and wireframes | Draft |
 | | [Architecture Decision Records](adr/) | MADR 4.0 | Various |
 | | [Spikes](spikes/) | Project convention | Various |
 
@@ -26,6 +27,8 @@ New reader with limited time: [Vision and Scope](vision-and-scope.md), then
 
 Evaluating the engineering: [SAD](architecture.md) sections 4, 8, and 9, then the
 [Test Plan](test-plan.md) section 5, then the [ADRs](adr/).
+
+Evaluating what it looks like to use: [User Interface Design](ui-design.md) sections 4 and 7.
 
 ## Document control
 

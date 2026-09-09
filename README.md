@@ -42,6 +42,7 @@ retrain any model. [What that covers and where it stops](docs/vision-and-scope.m
 | [Development Plan](docs/sdp.md) | Milestones, slices, acceptance criteria |
 | [Risk Register](docs/risk-register.md) | Active and closed risks |
 | [Decision Log](docs/decision-log.md) | Decisions, alternatives, revisit triggers |
+| [User Interface Design](docs/ui-design.md) | Screen inventory, wireframes, state coverage |
 | [Architecture Decision Records](docs/adr/) | The decisions that needed more than a table row |
 | [Spike Reports](docs/spikes/) | Investigations with raw data |
 
