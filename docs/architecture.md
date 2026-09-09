@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Document ID | NOVA-SAD-001 |
-| Version | 0.1 |
+| Version | 0.2 |
 | Status | Draft |
 | Owner | Laxmi Poudel |
 | Date | 2026-09-08 |
@@ -429,7 +429,9 @@ learning. Within one transaction the failure mode does not arise.
 
 The embedding dimension is fixed at schema creation. Changing the embedding model requires
 re-embedding every memory and rebuilding the index. This is documented rather than discovered, and
-is the reason the embedding decision is treated as blocking.
+is the reason the embedding decision was treated as blocking. It is settled: `embeddinggemma` at 768
+dimensions, per [ADR-0005](adr/0005-select-an-embedding-model-and-vector-dimension.md) on the
+evidence in NOVA-SPK-002.
 
 ### 8.5 Asynchronous execution
 
@@ -525,7 +527,6 @@ flowchart LR
 | ID | Risk or debt | Severity | Response |
 |---|---|---|---|
 | R-01 | Correction extraction may not reach usable precision on a local model | High | Measured at a defined checkpoint before dependent interface work. Fallback is user-authored rules with model assistance |
-| R-04 | The embedding model and dimension remain unselected, and the dimension is fixed in the schema | High | Blocking. A dedicated spike precedes schema definition |
 | R-03 | Inference nondeterminism may exceed evaluation gate margins | High | Variance measured before any threshold is set. Dataset grows rather than thresholds loosening |
 | R-05 | The Correction Recurrence Rate depends on a structural similarity threshold that is difficult to defend | Medium | Threshold fixed from measured distributions, documented, held constant, and always reported alongside retrieval precision |
 | R-08 | The 8B model class may not fit the VRAM budget, and was not measured | Medium | Two candidates retrieved and awaiting measurement |
@@ -549,3 +550,4 @@ See [NOVA-SRS-001 section 1.4](srs.md#14-definitions-acronyms-and-abbreviations)
 | Version | Date | Author | Change |
 |---|---|---|---|
 | 0.1 | 2026-09-08 | Laxmi Poudel | Initial draft |
+| 0.2 | 2026-09-08 | Laxmi Poudel | Embedding dimension fixed at 768 in section 8.4. R-04 moved to closed |

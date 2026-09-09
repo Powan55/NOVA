@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Document ID | NOVA-VS-001 |
-| Version | 0.1 |
+| Version | 0.2 |
 | Status | Draft |
 | Owner | Laxmi Poudel |
 | Date | 2026-09-08 |
@@ -201,3 +201,4 @@ See [SRS section 1.4](srs.md#14-definitions-acronyms-and-abbreviations).
 | Version | Date | Author | Change |
 |---|---|---|---|
 | 0.1 | 2026-09-08 | Laxmi Poudel | Initial draft |
+| 0.2 | 2026-09-08 | Laxmi Poudel | CON-7 recorded in the constraints table |

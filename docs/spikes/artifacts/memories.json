@@ -1,0 +1,146 @@
+[
+ {
+  "id": "mem-01",
+  "scope": "api_crud_endpoint",
+  "text": "Every endpoint needs an unauthenticated request expecting 401 and an authenticated request from an account without the right expecting 403.",
+  "applies_to": ["api-01", "api-02", "api-03", "api-04", "api-05"]
+ },
+ {
+  "id": "mem-02",
+  "scope": "api_crud_endpoint",
+  "text": "When an operation cascades to related records, assert the state of those related records afterwards, not only the primary resource.",
+  "applies_to": ["api-01", "api-05"]
+ },
+ {
+  "id": "mem-03",
+  "scope": "api_crud_endpoint",
+  "text": "A resource with a lifecycle needs one case per illegal transition, not a single representative one.",
+  "applies_to": ["api-04"]
+ },
+ {
+  "id": "mem-04",
+  "scope": "api_crud_endpoint",
+  "text": "Anything that creates a record or grants access needs a repeated-request case proving the second call is either idempotent or rejected.",
+  "applies_to": ["api-02", "api-05"]
+ },
+ {
+  "id": "mem-05",
+  "scope": "api_crud_endpoint",
+  "text": "Reads by identifier need a case where the record exists but belongs to somebody else, expecting the not-found response rather than the forbidden one, so existence is not disclosed.",
+  "applies_to": ["api-03"]
+ },
+ {
+  "id": "mem-06",
+  "scope": "auth_permission_flow",
+  "text": "Anything that issues a credential needs an expiry case and a replay case that presents the same credential twice.",
+  "applies_to": ["auth-01", "auth-03", "auth-04", "auth-05"]
+ },
+ {
+  "id": "mem-07",
+  "scope": "auth_permission_flow",
+  "text": "When a credential is replaced or withdrawn, prove the previous one stops working, not only that the new one starts.",
+  "applies_to": ["auth-01", "auth-05"]
+ },
+ {
+  "id": "mem-08",
+  "scope": "auth_permission_flow",
+  "text": "Verify entitlement changes against a session that was already open, not only against a fresh sign-in.",
+  "applies_to": ["auth-02", "auth-05"]
+ },
+ {
+  "id": "mem-09",
+  "scope": "auth_permission_flow",
+  "text": "Idle and absolute limits are separate cases, and renewal must be shown unable to extend past the absolute one.",
+  "applies_to": ["auth-03"]
+ },
+ {
+  "id": "mem-10",
+  "scope": "auth_permission_flow",
+  "text": "Enrolment is incomplete without the fallback codes: one authenticates once, and the same one is refused on reuse.",
+  "applies_to": ["auth-04"]
+ },
+ {
+  "id": "mem-11",
+  "scope": "ui_form",
+  "text": "Every form needs a case for the message shown against the offending field, not only for the failed submission as a whole.",
+  "applies_to": ["form-01", "form-02", "form-03", "form-04", "form-05"]
+ },
+ {
+  "id": "mem-12",
+  "scope": "ui_form",
+  "text": "Wherever the browser rejects input before sending it, add a case that posts the same payload directly to the server.",
+  "applies_to": ["form-01", "form-02", "form-04"]
+ },
+ {
+  "id": "mem-13",
+  "scope": "ui_form",
+  "text": "Anywhere a document can be attached, cover an oversized one, one whose declared type does not match its contents, and an empty one.",
+  "applies_to": ["form-03", "form-05"]
+ },
+ {
+  "id": "mem-14",
+  "scope": "ui_form",
+  "text": "Postal formats differ by country, so include a destination whose format is not the default one.",
+  "applies_to": ["form-02"]
+ },
+ {
+  "id": "mem-15",
+  "scope": "ui_form",
+  "text": "Where a value must be unique, include two simultaneous submissions carrying the same value.",
+  "applies_to": ["form-01", "form-04"]
+ },
+ {
+  "id": "mem-16",
+  "scope": "ui_form",
+  "text": "Batch input needs a partial-failure case: some entries rejected, the remainder committed, and the report identifying which line failed.",
+  "applies_to": ["form-03"]
+ },
+ {
+  "id": "mem-17",
+  "scope": "data_migration",
+  "text": "Every migration needs a reversal case exercised against records written after it ran.",
+  "applies_to": ["mig-01", "mig-02", "mig-03", "mig-04", "mig-05"]
+ },
+ {
+  "id": "mem-18",
+  "scope": "data_migration",
+  "text": "Cover the rows that do not fit the expected shape: single-token values, blanks, and rows that already look converted.",
+  "applies_to": ["mig-01", "mig-04"]
+ },
+ {
+  "id": "mem-19",
+  "scope": "data_migration",
+  "text": "Tightening a column to reject empties needs one case proving nothing is left empty and one for records written while the fill is still in progress.",
+  "applies_to": ["mig-02"]
+ },
+ {
+  "id": "mem-20",
+  "scope": "data_migration",
+  "text": "Numeric conversions need the largest and smallest stored values and a value that does not divide evenly, so rounding direction is pinned down.",
+  "applies_to": ["mig-03"]
+ },
+ {
+  "id": "mem-21",
+  "scope": "data_migration",
+  "text": "Clock shifts produce local readings that occur twice and readings that never occur; each needs its own case.",
+  "applies_to": ["mig-05"]
+ },
+ {
+  "id": "mem-22",
+  "scope": "data_migration",
+  "text": "When records are collapsed into one, prove that references held elsewhere resolve to the survivor.",
+  "applies_to": ["mig-04"]
+ },
+ {
+  "id": "mem-23",
+  "scope": "any",
+  "text": "Actions that change who can reach what must assert that a trail entry was written naming the account that acted.",
+  "applies_to": ["api-01", "api-04", "api-05", "auth-02", "auth-05"]
+ },
+ {
+  "id": "mem-24",
+  "scope": "any",
+  "text": "Cases carry an explicit priority and the highest-priority ones are listed first.",
+  "applies_to": ["api-01", "api-02", "api-03", "api-04", "api-05", "auth-01", "auth-02", "auth-03", "auth-04", "auth-05", "form-01", "form-02", "form-03", "form-04", "form-05", "mig-01", "mig-02", "mig-03", "mig-04", "mig-05"]
+ }
+]

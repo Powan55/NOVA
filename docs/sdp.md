@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Document ID | NOVA-SDP-001 |
-| Version | 0.1 |
+| Version | 0.2 |
 | Status | Draft |
 | Owner | Laxmi Poudel |
 | Date | 2026-09-08 |
@@ -137,8 +137,8 @@ Partially complete.
 | Objective | Eliminate the assumptions capable of invalidating the plan. Fix the decisions that are expensive to reverse |
 | Scope | Model selection spike; embedding spike; repository skeleton; datastore with vector extension and migrations; inference gateway with a fake implementation; deployment composition; continuous integration skeleton |
 | Exit criteria | A selected model produces schema-conformant plans at measured latency; embedding model and vector dimension fixed; container-to-host inference reachability verified |
-| Complete | Model selection spike, partial. Three of five candidates measured, harness and raw output committed |
-| Outstanding | Embedding spike (blocking); remaining model measurements; deployment composition; migrations; gateway; continuous integration |
+| Complete | Model selection spike, partial. Three of five candidates measured, harness and raw output committed. Embedding spike complete, five candidates measured, model and dimension fixed |
+| Outstanding | Remaining model measurements; deployment composition; migrations; gateway; continuous integration |
 
 #### M2. Agent workflow, 32 h
 
@@ -233,10 +233,10 @@ does elapsed time.
 Two entries are prerequisites rather than ordinary risks. Dependent work does not begin until they
 are resolved, because the cost of proceeding while wrong is rework rather than delay:
 
-| ID | Prerequisite |
-|---|---|
-| R-04 | Embedding model and vector dimension selected. Blocks schema definition |
-| R-01 | Extraction precision measured. Blocks dependent interface work in M3 |
+| ID | Prerequisite | State |
+|---|---|---|
+| R-04 | Embedding model and vector dimension selected. Blocks schema definition | Resolved 2026-09-08 by NOVA-SPK-002 and ADR-0005 |
+| R-01 | Extraction precision measured. Blocks dependent interface work in M3 | Outstanding |
 
 **Pre-committed scope reduction order.** Decided in advance so that reduction proceeds from a plan
 rather than under pressure. The decision point is week 6.
@@ -272,7 +272,7 @@ Assessment against the current state of the document set.
 | 7 | User interface design available | **Gap** | Operational scenarios exist. No screen inventory or wireframes. The trace viewer and applied-lessons presentation carry the project's explanatory value and neither is designed |
 | 8 | Architecture documented and reviewed | Partial | [NOVA-SAD-001](architecture.md) complete. Reviewed by the author only, per CON-2 |
 | 9 | Alternatives and trade-offs documented | Complete | [ADRs](adr/), [NOVA-DL-001](decision-log.md) |
-| 10 | Data model, ownership, retention, migration understood | **Blocked** | Entities and retention defined. The vector dimension is unselected and is fixed at schema creation |
+| 10 | Data model, ownership, retention, migration understood | Complete | Entities and retention defined. Vector dimension fixed at 768 by [ADR-0005](adr/0005-select-an-embedding-model-and-vector-dimension.md) |
 | 11 | Interface contracts defined | Complete | [NOVA-SRS-001 §3.4](srs.md) |
 | 12 | Security and privacy requirements identified | Complete | [NOVA-TM-001](threat-model.md) |
 | 13 | Dependencies, risks, open items tracked | Complete | [NOVA-RR-001](risk-register.md) |
@@ -282,18 +282,18 @@ Assessment against the current state of the document set.
 | 17 | Work decomposed into estimable, demonstrable increments | Complete | Section 6.2 |
 | 18 | Acceptance criteria defined | Complete | Section 6.4 |
 
-Fourteen complete, two partial or blocked, two gaps.
+Fifteen complete, one partial, two gaps.
 
 **Outstanding items, in order of consequence.**
 
 | ID | Item | Effort | Rationale |
 |---|---|---|---|
-| G1 | Select the embedding model and fix the vector dimension | ~4 h | **Blocking.** Selecting after schema creation requires re-embedding every memory and rebuilding the index |
+| ~~G1~~ | ~~Select the embedding model and fix the vector dimension~~ | ~4 h spent | **Resolved 2026-09-08.** `embeddinggemma` at 768 dimensions, [NOVA-SPK-002](spikes/2026-09-08-embedding-selection.md) and [ADR-0005](adr/0005-select-an-embedding-model-and-vector-dimension.md) |
+| G4 | Verify container-to-host inference reachability and datastore provisioning | ~1 h | Removes the most probable early impediment. Now the only remaining entry condition |
 | G2 | Complete the model selection spike across all cases and candidates | ~3 h, largely unattended | Strongly recommended. A provisional model choice is revisable without rework, unlike the vector dimension |
 | G3 | Produce a screen inventory and wireframes for the four views | ~4 h | Required before interface work. Does not block foundation or backend work |
-| G4 | Verify container-to-host inference reachability and datastore provisioning | ~1 h | Removes the most probable early impediment |
 
-G1 and G4 together are approximately one working day and are the practical entry condition.
+G1 is resolved. G4 is what now stands between the document set and implementation.
 
 ## 6. Technical process plans
 
@@ -509,3 +509,4 @@ None of this permits describing the system as self-training before a trained mod
 | Version | Date | Author | Change |
 |---|---|---|---|
 | 0.1 | 2026-09-08 | Laxmi Poudel | Initial draft |
+| 0.2 | 2026-09-08 | Laxmi Poudel | CON-7 recorded. G1 resolved by NOVA-SPK-002. Entry criterion 10 unblocked. M1 status updated |

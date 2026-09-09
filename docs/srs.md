@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Document ID | NOVA-SRS-001 |
-| Version | 0.1 |
+| Version | 0.2 |
 | Status | Draft |
 | Owner | Laxmi Poudel |
 | Date | 2026-09-08 |
@@ -453,7 +453,7 @@ method and the results are recorded.
 | DEP-2 | Model weights | Five candidates retrieved |
 | DEP-3 | Relational datastore with vector indexing | Not provisioned |
 | DEP-4 | Container runtime | Installed, not running |
-| DEP-5 | Embedding model, and consequently the vector dimension | Not selected. Blocks schema definition |
+| DEP-5 | Embedding model, and consequently the vector dimension | `embeddinggemma`, 768 dimensions. Selected 2026-09-08 |
 
 ## Appendix B. Acronyms and abbreviations
 
@@ -480,3 +480,4 @@ method and the results are recorded.
 | Version | Date | Author | Change |
 |---|---|---|---|
 | 0.1 | 2026-09-08 | Laxmi Poudel | Initial draft |
+| 0.2 | 2026-09-08 | Laxmi Poudel | CON-7 recorded in the baseline. DEP-5 resolved: embedding model and vector dimension selected |

@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Document ID | NOVA-RR-001 |
-| Version | 0.1 |
+| Version | 0.2 |
 | Status | Draft |
 | Owner | Laxmi Poudel |
 | Date | 2026-09-08 |
@@ -42,7 +42,6 @@ does elapsed time.
 | R-01 | Correction extraction does not reach usable precision on a 4B-parameter model. Candidates prove overbroad, trivial, or incorrect often enough that confirmation becomes an obstacle rather than a safeguard | High | High | Reduce | Precision measured against approximately 15 hand-labelled authentic corrections at a defined checkpoint, before dependent interface work. Fallback is user-authored rules with model assistance | Precision below a usable threshold at the M3 checkpoint | M3 |
 | R-02 | Evaluation dataset construction is underestimated. Approximately 50 stratified cases with precisely stated expected properties represents 15 to 25 hours of authoring on the critical path | High | High | Reduce | Authoring begins two milestones early. Twenty cases already exist from the model selection spike and transfer directly, removing approximately one third of the effort | Fewer than 30 cases authored by the start of M5 | M5 |
 | R-03 | Inference nondeterminism exceeds gate margins and the regression gate becomes unstable. An unstable gate is disabled in practice, and a disabled gate is worse than none because it presents as protection | High | High | Reduce | Run-over-run variance measured before any threshold is set. Where variance is excessive, the dataset is enlarged rather than thresholds loosened | Identical inputs producing divergent gate verdicts across runs | M5 |
-| R-04 | The embedding model and vector dimension remain unselected. The dimension is fixed at schema creation | High | High | Avoid | Treated as blocking. A dedicated spike precedes schema definition | Schema work commencing before the spike concludes | M1 |
 | R-05 | The Correction Recurrence Rate depends on a structural similarity threshold that is difficult to defend, and the primary metric is only as sound as that choice | Medium | High | Reduce | Threshold derived from measured distributions, documented, held constant across runs, and always reported alongside retrieval precision so that a memory retrieved and disregarded is distinguishable from one never retrieved | The metric moving materially under small threshold perturbation | M5 |
 | R-06 | Available effort falls to the lower bound and the plan exceeds budget | Medium | Medium | Accept | Scope reduction order pre-committed. Decision point at week 6, not week 12 | Cumulative hours tracking below plan at week 6 | Week 6 |
 | R-07 | Provisional values are replaced with optimistic figures under presentation pressure | Medium | Critical | Avoid | Claim discipline recorded in NOVA-SDP-001 §7.6 and reviewed at the start of the final milestone rather than at its end. A placeholder that cannot be filled becomes a removed claim | Any figure appearing without a stated method, sample size, and reference configuration | M7 |
@@ -64,16 +63,18 @@ does elapsed time.
 |---|---|---|
 | R-C1 | Available hardware cannot sustain a local model at acceptable latency and schema fidelity. This was the risk capable of invalidating the primary workflow decision | **Closed by measurement, 2026-09-07.** 4B-parameter class: 12 of 12 schema-conformant on first attempt, 2.9 to 3.9 GB resident, fully GPU-offloaded, 9 to 26 s warm generation. Substantially inside the provisional latency target |
 | R-C2 | The recorded hardware assumption of 8 GB or greater VRAM was incorrect | **Closed, 2026-09-07.** The device provides 6 GB. Identified before any implementation, at a cost of one afternoon rather than a rewrite in the ninth week. The candidate model list was revised and the constraint corrected throughout the document set |
+| R-C3 | The embedding model and vector dimension remained unselected, and the dimension is fixed at schema creation | **Closed by measurement, 2026-09-08.** `embeddinggemma` at 768 dimensions, selected in [ADR-0005](adr/0005-select-an-embedding-model-and-vector-dimension.md) on the evidence in NOVA-SPK-002. Five candidates measured against 71 hand-labelled requirement-to-rule pairs. Schema definition is unblocked |
 
 ## 4. Prerequisites
 
 Two entries are prerequisites rather than ordinary risks. Dependent work does not commence until
-they are resolved, because proceeding while wrong incurs rework rather than delay.
+they are resolved, because proceeding while wrong incurs rework rather than delay. They are retained
+here once resolved so that the sequencing remains legible.
 
-| ID | Prerequisite | Blocks |
-|---|---|---|
-| R-04 | Embedding model and vector dimension selected | Schema definition, and therefore all persistence work |
-| R-01 | Extraction precision measured | Memory management interface and applied-lessons presentation |
+| ID | Prerequisite | Blocks | State |
+|---|---|---|---|
+| R-04 | Embedding model and vector dimension selected | Schema definition, and therefore all persistence work | Resolved 2026-09-08. Closed as R-C3 |
+| R-01 | Extraction precision measured | Memory management interface and applied-lessons presentation | Outstanding |
 
 ---
 
@@ -82,3 +83,4 @@ they are resolved, because proceeding while wrong incurs rework rather than dela
 | Version | Date | Author | Change |
 |---|---|---|---|
 | 0.1 | 2026-09-08 | Laxmi Poudel | Initial draft |
+| 0.2 | 2026-09-08 | Laxmi Poudel | R-04 closed by measurement as R-C3 |

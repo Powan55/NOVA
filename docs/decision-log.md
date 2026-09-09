@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Document ID | NOVA-DL-001 |
-| Version | 0.1 |
+| Version | 0.2 |
 | Status | Draft |
 | Owner | Laxmi Poudel |
 | Date | 2026-09-08 |
@@ -67,9 +67,10 @@ of the project.
 | DL-023 | Specific model and quantization | Open | At a sample of four per model, one candidate leads on content quality, another on latency, a third is weakest on coverage | A sample of four cannot separate them. Decide following the complete run |
 | DL-024 | Single-stage constrained generation rather than reason-then-structure | Provisional | Structural conformance was complete at single stage across every measured candidate | Revisit only if content quality proves weak on the complete run. Two-stage generation costs an additional inference call |
 | DL-025 | Thinking disabled on hybrid reasoning models | Accepted | Required for one candidate family. Reasoning tokens dominate generation duration and interact poorly with constrained decoding | A configuration requirement, not an optimization |
-| DL-026 | Embedding model and vector dimension | Open, blocking | None | Recorded as [ADR-0005](adr/0005-select-an-embedding-model-and-vector-dimension.md). Requires a dedicated spike before schema definition |
+| DL-026 | Embedding model and vector dimension | Accepted | `embeddinggemma` at 768 dimensions. Five candidates measured against 71 hand-labelled pairs: first on every discriminating metric, 77 ms warm, 681 MB resident, co-resident with the generation model inside 6 GB | Decided in [ADR-0005](adr/0005-select-an-embedding-model-and-vector-dimension.md) on the evidence in NOVA-SPK-002. Revisit when authentic corrections exist in volume |
 | DL-027 | Whether the 8B class fits within the VRAM budget | Open | Two candidates retrieved, neither measured | Measure residency and offload distribution |
 | DL-028 | Duplicate similarity and structural similarity thresholds | Open | None | Derive from measured distributions, then fix |
+| DL-029 | Always-apply memories are held outside the vector index rather than retrieved by similarity | Provisional | A rule labelled relevant to all twenty requirements was ranked 6th to 8th by every one of five candidates, for every requirement. It accounts for the entire gap between recall@5 of 0.701 and scoped recall of 0.967 | A content-free rule gives semantic ranking nothing to match on. Settle the memory entity's treatment of scope before the M3 schema |
 
 ## 6. Architecture Decision Records
 
@@ -111,3 +112,4 @@ of the project.
 | Version | Date | Author | Change |
 |---|---|---|---|
 | 0.1 | 2026-09-08 | Laxmi Poudel | Initial draft |
+| 0.2 | 2026-09-08 | Laxmi Poudel | DL-026 accepted. DL-029 added: always-apply memories held outside the vector index |

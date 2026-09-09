@@ -26,7 +26,7 @@ TIMEOUT = 300
 
 CaseType = Literal["happy", "negative", "boundary", "auth", "perf"]
 
-# Playbook required-case-types. See docs/02-technical-design.md, strategy layer.
+# Playbook required-case-types, as defined for this spike. Playbook concept: SAD section 8.1.
 REQUIRED_TYPES: dict[str, list[str]] = {
     "api_crud_endpoint": ["happy", "negative", "boundary", "auth"],
     "auth_permission_flow": ["happy", "negative", "auth"],
@@ -35,7 +35,7 @@ REQUIRED_TYPES: dict[str, list[str]] = {
 }
 
 
-# --- the schema under test: test-plan v1, see docs/02-technical-design.md ---
+# --- the schema under test: test-plan v1, as drafted for this spike (FR-2) ---
 class TestCase(BaseModel):
     title: str
     case_type: CaseType

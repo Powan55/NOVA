@@ -6,13 +6,14 @@ implementation. Each produces a report with a stated method, raw output, and lim
 | ID | Spike | Date | Status | Outcome |
 |---|---|---|---|---|
 | NOVA-SPK-001 | [Local model selection under a 6 GB VRAM ceiling](2026-09-07-model-selection.md) | 2026-09-07 | Partial | The 4B-parameter class holds the test plan schema at 9 to 26 s warm, fully GPU-resident. The 8B class remains unmeasured |
+| NOVA-SPK-002 | [Embedding model and vector dimension](2026-09-08-embedding-selection.md) | 2026-09-08 | Complete | `embeddinggemma` at 768 dimensions. Leads every discriminating retrieval metric across five candidates, 77 ms warm, co-resident with the generation model inside 6 GB |
 
 ## Planned
 
 | Spike | Resolves | Blocking |
 |---|---|---|
-| Embedding model and vector dimension | [ADR-0005](../adr/0005-select-an-embedding-model-and-vector-dimension.md), R-04 | Yes. Blocks schema definition |
 | Container-to-host inference reachability | R-09 | No, but it is the most probable early impediment |
+| Hybrid lexical and vector ranking | NOVA-SPK-002 follow-up 3 | No. Deferred until authentic corrections exist |
 
 ## Conventions
 

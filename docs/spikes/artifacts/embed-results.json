@@ -1,0 +1,2467 @@
+{
+ "corpus": {
+  "requirements": 20,
+  "memories": 24,
+  "labelled_pairs": 71,
+  "narrow_memories": 17,
+  "universal_memories": 1,
+  "mean_relevant_per_requirement": 3.55,
+  "lexical_overlap_jaccard": {
+   "mean": 0.06,
+   "min": 0.014,
+   "max": 0.114
+  }
+ },
+ "bm25": {
+  "typed": {
+   "recall_at_k": 0.695,
+   "precision_at_k": 0.49,
+   "rr": 0.771,
+   "narrow_recall": 0.7,
+   "scoped_recall": 0.725
+  },
+  "open": {
+   "recall_at_k": 0.389,
+   "precision_at_k": 0.27,
+   "rr": 0.571,
+   "narrow_recall": 0.425,
+   "scoped_recall": 0.454
+  }
+ },
+ "models": [
+  {
+   "model": "all-minilm",
+   "dim": 384,
+   "prefixed": false,
+   "cold_load_ms": 1004,
+   "ollama_ps": "NAME                     ID              SIZE      PROCESSOR    CONTEXT    UNTIL              \nall-minilm:latest        1b226e2802db    26 MB     100% GPU     256        4 minutes from now    \nembeddinggemma:latest    85462619ee72    681 MB    100% GPU     2048       3 minutes from now    \ngemma3:4b                a2af6cc3eb7f    2.9 GB    100% GPU     8192       3 minutes from now",
+   "warm_ms": {
+    "n": 44,
+    "min": 43,
+    "max": 126,
+    "mean": 58.0,
+    "mean_doc": 56.0,
+    "mean_query": 60.4
+   },
+   "retrieval": {
+    "dim384_typed": {
+     "recall_at_k": 0.772,
+     "precision_at_k": 0.55,
+     "rr": 0.842,
+     "narrow_recall": 0.95,
+     "scoped_recall": 0.967
+    },
+    "dim384_open": {
+     "recall_at_k": 0.477,
+     "precision_at_k": 0.32,
+     "rr": 0.724,
+     "narrow_recall": 0.7,
+     "scoped_recall": 0.692
+    },
+    "dim256_typed": {
+     "recall_at_k": 0.753,
+     "precision_at_k": 0.53,
+     "rr": 0.838,
+     "narrow_recall": 0.95,
+     "scoped_recall": 0.954
+    },
+    "dim256_open": {
+     "recall_at_k": 0.467,
+     "precision_at_k": 0.31,
+     "rr": 0.724,
+     "narrow_recall": 0.7,
+     "scoped_recall": 0.679
+    }
+   },
+   "per_requirement": [
+    {
+     "id": "api-01",
+     "top5": [
+      "mem-23",
+      "mem-04",
+      "mem-01",
+      "mem-05",
+      "mem-03"
+     ],
+     "relevant": [
+      "mem-01",
+      "mem-02",
+      "mem-23",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      3,
+      6,
+      7
+     ]
+    },
+    {
+     "id": "api-02",
+     "top5": [
+      "mem-04",
+      "mem-01",
+      "mem-05",
+      "mem-23",
+      "mem-03"
+     ],
+     "relevant": [
+      "mem-01",
+      "mem-04",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      2,
+      7
+     ]
+    },
+    {
+     "id": "api-03",
+     "top5": [
+      "mem-05",
+      "mem-01",
+      "mem-04",
+      "mem-02",
+      "mem-24"
+     ],
+     "relevant": [
+      "mem-01",
+      "mem-05",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      2,
+      5
+     ]
+    },
+    {
+     "id": "api-04",
+     "top5": [
+      "mem-04",
+      "mem-23",
+      "mem-03",
+      "mem-02",
+      "mem-24"
+     ],
+     "relevant": [
+      "mem-01",
+      "mem-03",
+      "mem-23",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      2,
+      3,
+      5,
+      7
+     ]
+    },
+    {
+     "id": "api-05",
+     "top5": [
+      "mem-05",
+      "mem-01",
+      "mem-04",
+      "mem-02",
+      "mem-23"
+     ],
+     "relevant": [
+      "mem-01",
+      "mem-02",
+      "mem-04",
+      "mem-23",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      2,
+      3,
+      4,
+      5,
+      7
+     ]
+    },
+    {
+     "id": "auth-01",
+     "top5": [
+      "mem-06",
+      "mem-07",
+      "mem-08",
+      "mem-10",
+      "mem-23"
+     ],
+     "relevant": [
+      "mem-06",
+      "mem-07",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      2,
+      7
+     ]
+    },
+    {
+     "id": "auth-02",
+     "top5": [
+      "mem-10",
+      "mem-08",
+      "mem-07",
+      "mem-23",
+      "mem-06"
+     ],
+     "relevant": [
+      "mem-08",
+      "mem-23",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      2,
+      4,
+      7
+     ]
+    },
+    {
+     "id": "auth-03",
+     "top5": [
+      "mem-08",
+      "mem-07",
+      "mem-06",
+      "mem-09",
+      "mem-10"
+     ],
+     "relevant": [
+      "mem-06",
+      "mem-09",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      3,
+      4,
+      7
+     ]
+    },
+    {
+     "id": "auth-04",
+     "top5": [
+      "mem-10",
+      "mem-06",
+      "mem-08",
+      "mem-07",
+      "mem-24"
+     ],
+     "relevant": [
+      "mem-06",
+      "mem-10",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      2,
+      5
+     ]
+    },
+    {
+     "id": "auth-05",
+     "top5": [
+      "mem-07",
+      "mem-10",
+      "mem-06",
+      "mem-08",
+      "mem-23"
+     ],
+     "relevant": [
+      "mem-06",
+      "mem-07",
+      "mem-08",
+      "mem-23",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      3,
+      4,
+      5,
+      7
+     ]
+    },
+    {
+     "id": "form-01",
+     "top5": [
+      "mem-23",
+      "mem-11",
+      "mem-12",
+      "mem-15",
+      "mem-13"
+     ],
+     "relevant": [
+      "mem-11",
+      "mem-12",
+      "mem-15",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      2,
+      3,
+      4,
+      8
+     ]
+    },
+    {
+     "id": "form-02",
+     "top5": [
+      "mem-14",
+      "mem-12",
+      "mem-11",
+      "mem-23",
+      "mem-15"
+     ],
+     "relevant": [
+      "mem-11",
+      "mem-12",
+      "mem-14",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      2,
+      3,
+      8
+     ]
+    },
+    {
+     "id": "form-03",
+     "top5": [
+      "mem-16",
+      "mem-13",
+      "mem-14",
+      "mem-11",
+      "mem-24"
+     ],
+     "relevant": [
+      "mem-11",
+      "mem-13",
+      "mem-16",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      2,
+      4,
+      5
+     ]
+    },
+    {
+     "id": "form-04",
+     "top5": [
+      "mem-23",
+      "mem-12",
+      "mem-14",
+      "mem-11",
+      "mem-15"
+     ],
+     "relevant": [
+      "mem-11",
+      "mem-12",
+      "mem-15",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      2,
+      4,
+      5,
+      7
+     ]
+    },
+    {
+     "id": "form-05",
+     "top5": [
+      "mem-13",
+      "mem-15",
+      "mem-11",
+      "mem-24",
+      "mem-14"
+     ],
+     "relevant": [
+      "mem-11",
+      "mem-13",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      3,
+      4
+     ]
+    },
+    {
+     "id": "mig-01",
+     "top5": [
+      "mem-18",
+      "mem-17",
+      "mem-23",
+      "mem-22",
+      "mem-19"
+     ],
+     "relevant": [
+      "mem-17",
+      "mem-18",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      2,
+      7
+     ]
+    },
+    {
+     "id": "mig-02",
+     "top5": [
+      "mem-17",
+      "mem-19",
+      "mem-22",
+      "mem-18",
+      "mem-23"
+     ],
+     "relevant": [
+      "mem-17",
+      "mem-19",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      2,
+      6
+     ]
+    },
+    {
+     "id": "mig-03",
+     "top5": [
+      "mem-20",
+      "mem-18",
+      "mem-17",
+      "mem-21",
+      "mem-23"
+     ],
+     "relevant": [
+      "mem-17",
+      "mem-20",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      3,
+      7
+     ]
+    },
+    {
+     "id": "mig-04",
+     "top5": [
+      "mem-22",
+      "mem-17",
+      "mem-18",
+      "mem-24",
+      "mem-19"
+     ],
+     "relevant": [
+      "mem-17",
+      "mem-18",
+      "mem-22",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      2,
+      3,
+      4
+     ]
+    },
+    {
+     "id": "mig-05",
+     "top5": [
+      "mem-21",
+      "mem-17",
+      "mem-18",
+      "mem-20",
+      "mem-23"
+     ],
+     "relevant": [
+      "mem-17",
+      "mem-21",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      2,
+      7
+     ]
+    }
+   ]
+  },
+  {
+   "model": "nomic-embed-text",
+   "dim": 768,
+   "prefixed": true,
+   "cold_load_ms": 5931,
+   "ollama_ps": "NAME                       ID              SIZE      PROCESSOR    CONTEXT    UNTIL              \nnomic-embed-text:latest    0a109f422b47    323 MB    100% GPU     2048       4 minutes from now    \nall-minilm:latest          1b226e2802db    26 MB     100% GPU     256        4 minutes from now    \ngemma3:4b                  a2af6cc3eb7f    2.9 GB    100% GPU     8192       3 minutes from now",
+   "warm_ms": {
+    "n": 44,
+    "min": 44,
+    "max": 127,
+    "mean": 57.2,
+    "mean_doc": 55.9,
+    "mean_query": 58.8
+   },
+   "retrieval": {
+    "dim768_typed": {
+     "recall_at_k": 0.674,
+     "precision_at_k": 0.48,
+     "rr": 0.85,
+     "narrow_recall": 0.9,
+     "scoped_recall": 0.954
+    },
+    "dim768_open": {
+     "recall_at_k": 0.488,
+     "precision_at_k": 0.33,
+     "rr": 0.728,
+     "narrow_recall": 0.65,
+     "scoped_recall": 0.704
+    },
+    "dim256_typed": {
+     "recall_at_k": 0.691,
+     "precision_at_k": 0.49,
+     "rr": 0.883,
+     "narrow_recall": 0.9,
+     "scoped_recall": 0.954
+    },
+    "dim256_open": {
+     "recall_at_k": 0.42,
+     "precision_at_k": 0.28,
+     "rr": 0.731,
+     "narrow_recall": 0.625,
+     "scoped_recall": 0.608
+    },
+    "dim512_typed": {
+     "recall_at_k": 0.677,
+     "precision_at_k": 0.48,
+     "rr": 0.858,
+     "narrow_recall": 0.925,
+     "scoped_recall": 0.958
+    },
+    "dim512_open": {
+     "recall_at_k": 0.476,
+     "precision_at_k": 0.32,
+     "rr": 0.757,
+     "narrow_recall": 0.675,
+     "scoped_recall": 0.688
+    }
+   },
+   "per_requirement": [
+    {
+     "id": "api-01",
+     "top5": [
+      "mem-01",
+      "mem-05",
+      "mem-04",
+      "mem-02",
+      "mem-23"
+     ],
+     "relevant": [
+      "mem-01",
+      "mem-02",
+      "mem-23",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      4,
+      5,
+      7
+     ]
+    },
+    {
+     "id": "api-02",
+     "top5": [
+      "mem-04",
+      "mem-01",
+      "mem-05",
+      "mem-03",
+      "mem-02"
+     ],
+     "relevant": [
+      "mem-01",
+      "mem-04",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      2,
+      7
+     ]
+    },
+    {
+     "id": "api-03",
+     "top5": [
+      "mem-01",
+      "mem-05",
+      "mem-04",
+      "mem-02",
+      "mem-03"
+     ],
+     "relevant": [
+      "mem-01",
+      "mem-05",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      2,
+      6
+     ]
+    },
+    {
+     "id": "api-04",
+     "top5": [
+      "mem-02",
+      "mem-01",
+      "mem-04",
+      "mem-23",
+      "mem-05"
+     ],
+     "relevant": [
+      "mem-01",
+      "mem-03",
+      "mem-23",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      2,
+      4,
+      6,
+      7
+     ]
+    },
+    {
+     "id": "api-05",
+     "top5": [
+      "mem-05",
+      "mem-04",
+      "mem-01",
+      "mem-23",
+      "mem-02"
+     ],
+     "relevant": [
+      "mem-01",
+      "mem-02",
+      "mem-04",
+      "mem-23",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      2,
+      3,
+      4,
+      5,
+      7
+     ]
+    },
+    {
+     "id": "auth-01",
+     "top5": [
+      "mem-10",
+      "mem-07",
+      "mem-08",
+      "mem-06",
+      "mem-09"
+     ],
+     "relevant": [
+      "mem-06",
+      "mem-07",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      2,
+      4,
+      7
+     ]
+    },
+    {
+     "id": "auth-02",
+     "top5": [
+      "mem-08",
+      "mem-07",
+      "mem-23",
+      "mem-09",
+      "mem-06"
+     ],
+     "relevant": [
+      "mem-08",
+      "mem-23",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      3,
+      7
+     ]
+    },
+    {
+     "id": "auth-03",
+     "top5": [
+      "mem-08",
+      "mem-09",
+      "mem-07",
+      "mem-06",
+      "mem-10"
+     ],
+     "relevant": [
+      "mem-06",
+      "mem-09",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      2,
+      4,
+      7
+     ]
+    },
+    {
+     "id": "auth-04",
+     "top5": [
+      "mem-10",
+      "mem-06",
+      "mem-08",
+      "mem-07",
+      "mem-09"
+     ],
+     "relevant": [
+      "mem-06",
+      "mem-10",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      2,
+      7
+     ]
+    },
+    {
+     "id": "auth-05",
+     "top5": [
+      "mem-07",
+      "mem-10",
+      "mem-09",
+      "mem-06",
+      "mem-08"
+     ],
+     "relevant": [
+      "mem-06",
+      "mem-07",
+      "mem-08",
+      "mem-23",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      4,
+      5,
+      6,
+      7
+     ]
+    },
+    {
+     "id": "form-01",
+     "top5": [
+      "mem-11",
+      "mem-16",
+      "mem-12",
+      "mem-23",
+      "mem-15"
+     ],
+     "relevant": [
+      "mem-11",
+      "mem-12",
+      "mem-15",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      3,
+      5,
+      8
+     ]
+    },
+    {
+     "id": "form-02",
+     "top5": [
+      "mem-14",
+      "mem-12",
+      "mem-11",
+      "mem-16",
+      "mem-13"
+     ],
+     "relevant": [
+      "mem-11",
+      "mem-12",
+      "mem-14",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      2,
+      3,
+      8
+     ]
+    },
+    {
+     "id": "form-03",
+     "top5": [
+      "mem-12",
+      "mem-16",
+      "mem-11",
+      "mem-13",
+      "mem-15"
+     ],
+     "relevant": [
+      "mem-11",
+      "mem-13",
+      "mem-16",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      2,
+      3,
+      4,
+      7
+     ]
+    },
+    {
+     "id": "form-04",
+     "top5": [
+      "mem-12",
+      "mem-23",
+      "mem-11",
+      "mem-13",
+      "mem-16"
+     ],
+     "relevant": [
+      "mem-11",
+      "mem-12",
+      "mem-15",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      3,
+      6,
+      8
+     ]
+    },
+    {
+     "id": "form-05",
+     "top5": [
+      "mem-11",
+      "mem-15",
+      "mem-12",
+      "mem-16",
+      "mem-13"
+     ],
+     "relevant": [
+      "mem-11",
+      "mem-13",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      5,
+      8
+     ]
+    },
+    {
+     "id": "mig-01",
+     "top5": [
+      "mem-18",
+      "mem-19",
+      "mem-17",
+      "mem-22",
+      "mem-20"
+     ],
+     "relevant": [
+      "mem-17",
+      "mem-18",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      3,
+      7
+     ]
+    },
+    {
+     "id": "mig-02",
+     "top5": [
+      "mem-19",
+      "mem-17",
+      "mem-18",
+      "mem-22",
+      "mem-20"
+     ],
+     "relevant": [
+      "mem-17",
+      "mem-19",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      2,
+      7
+     ]
+    },
+    {
+     "id": "mig-03",
+     "top5": [
+      "mem-20",
+      "mem-19",
+      "mem-18",
+      "mem-17",
+      "mem-22"
+     ],
+     "relevant": [
+      "mem-17",
+      "mem-20",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      4,
+      8
+     ]
+    },
+    {
+     "id": "mig-04",
+     "top5": [
+      "mem-22",
+      "mem-17",
+      "mem-19",
+      "mem-20",
+      "mem-18"
+     ],
+     "relevant": [
+      "mem-17",
+      "mem-18",
+      "mem-22",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      2,
+      5,
+      8
+     ]
+    },
+    {
+     "id": "mig-05",
+     "top5": [
+      "mem-18",
+      "mem-21",
+      "mem-20",
+      "mem-17",
+      "mem-22"
+     ],
+     "relevant": [
+      "mem-17",
+      "mem-21",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      2,
+      4,
+      8
+     ]
+    }
+   ]
+  },
+  {
+   "model": "embeddinggemma",
+   "dim": 768,
+   "prefixed": true,
+   "cold_load_ms": 7053,
+   "ollama_ps": "NAME                       ID              SIZE      PROCESSOR    CONTEXT    UNTIL              \nembeddinggemma:latest      85462619ee72    681 MB    100% GPU     2048       4 minutes from now    \nnomic-embed-text:latest    0a109f422b47    323 MB    100% GPU     2048       4 minutes from now    \ngemma3:4b                  a2af6cc3eb7f    2.9 GB    100% GPU     8192       2 minutes from now",
+   "warm_ms": {
+    "n": 44,
+    "min": 60,
+    "max": 200,
+    "mean": 76.6,
+    "mean_doc": 77.1,
+    "mean_query": 76.0
+   },
+   "retrieval": {
+    "dim768_typed": {
+     "recall_at_k": 0.701,
+     "precision_at_k": 0.5,
+     "rr": 0.9,
+     "narrow_recall": 1.0,
+     "scoped_recall": 0.967
+    },
+    "dim768_open": {
+     "recall_at_k": 0.569,
+     "precision_at_k": 0.39,
+     "rr": 0.86,
+     "narrow_recall": 0.775,
+     "scoped_recall": 0.817
+    },
+    "dim256_typed": {
+     "recall_at_k": 0.697,
+     "precision_at_k": 0.5,
+     "rr": 0.892,
+     "narrow_recall": 1.0,
+     "scoped_recall": 0.983
+    },
+    "dim256_open": {
+     "recall_at_k": 0.527,
+     "precision_at_k": 0.36,
+     "rr": 0.8,
+     "narrow_recall": 0.85,
+     "scoped_recall": 0.758
+    },
+    "dim512_typed": {
+     "recall_at_k": 0.684,
+     "precision_at_k": 0.49,
+     "rr": 0.892,
+     "narrow_recall": 1.0,
+     "scoped_recall": 0.967
+    },
+    "dim512_open": {
+     "recall_at_k": 0.557,
+     "precision_at_k": 0.38,
+     "rr": 0.799,
+     "narrow_recall": 0.85,
+     "scoped_recall": 0.8
+    }
+   },
+   "per_requirement": [
+    {
+     "id": "api-01",
+     "top5": [
+      "mem-01",
+      "mem-05",
+      "mem-04",
+      "mem-23",
+      "mem-02"
+     ],
+     "relevant": [
+      "mem-01",
+      "mem-02",
+      "mem-23",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      4,
+      5,
+      7
+     ]
+    },
+    {
+     "id": "api-02",
+     "top5": [
+      "mem-04",
+      "mem-01",
+      "mem-03",
+      "mem-02",
+      "mem-23"
+     ],
+     "relevant": [
+      "mem-01",
+      "mem-04",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      2,
+      7
+     ]
+    },
+    {
+     "id": "api-03",
+     "top5": [
+      "mem-05",
+      "mem-01",
+      "mem-04",
+      "mem-02",
+      "mem-24"
+     ],
+     "relevant": [
+      "mem-01",
+      "mem-05",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      2,
+      5
+     ]
+    },
+    {
+     "id": "api-04",
+     "top5": [
+      "mem-01",
+      "mem-23",
+      "mem-02",
+      "mem-03",
+      "mem-04"
+     ],
+     "relevant": [
+      "mem-01",
+      "mem-03",
+      "mem-23",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      2,
+      4,
+      7
+     ]
+    },
+    {
+     "id": "api-05",
+     "top5": [
+      "mem-01",
+      "mem-04",
+      "mem-05",
+      "mem-23",
+      "mem-02"
+     ],
+     "relevant": [
+      "mem-01",
+      "mem-02",
+      "mem-04",
+      "mem-23",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      2,
+      4,
+      5,
+      7
+     ]
+    },
+    {
+     "id": "auth-01",
+     "top5": [
+      "mem-10",
+      "mem-06",
+      "mem-07",
+      "mem-08",
+      "mem-23"
+     ],
+     "relevant": [
+      "mem-06",
+      "mem-07",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      2,
+      3,
+      7
+     ]
+    },
+    {
+     "id": "auth-02",
+     "top5": [
+      "mem-23",
+      "mem-08",
+      "mem-07",
+      "mem-06",
+      "mem-10"
+     ],
+     "relevant": [
+      "mem-08",
+      "mem-23",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      2,
+      6
+     ]
+    },
+    {
+     "id": "auth-03",
+     "top5": [
+      "mem-08",
+      "mem-06",
+      "mem-09",
+      "mem-10",
+      "mem-07"
+     ],
+     "relevant": [
+      "mem-06",
+      "mem-09",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      2,
+      3,
+      7
+     ]
+    },
+    {
+     "id": "auth-04",
+     "top5": [
+      "mem-10",
+      "mem-06",
+      "mem-08",
+      "mem-07",
+      "mem-23"
+     ],
+     "relevant": [
+      "mem-06",
+      "mem-10",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      2,
+      7
+     ]
+    },
+    {
+     "id": "auth-05",
+     "top5": [
+      "mem-07",
+      "mem-06",
+      "mem-08",
+      "mem-23",
+      "mem-10"
+     ],
+     "relevant": [
+      "mem-06",
+      "mem-07",
+      "mem-08",
+      "mem-23",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      2,
+      3,
+      4,
+      7
+     ]
+    },
+    {
+     "id": "form-01",
+     "top5": [
+      "mem-11",
+      "mem-15",
+      "mem-12",
+      "mem-16",
+      "mem-14"
+     ],
+     "relevant": [
+      "mem-11",
+      "mem-12",
+      "mem-15",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      2,
+      3,
+      8
+     ]
+    },
+    {
+     "id": "form-02",
+     "top5": [
+      "mem-14",
+      "mem-12",
+      "mem-11",
+      "mem-16",
+      "mem-15"
+     ],
+     "relevant": [
+      "mem-11",
+      "mem-12",
+      "mem-14",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      2,
+      3,
+      8
+     ]
+    },
+    {
+     "id": "form-03",
+     "top5": [
+      "mem-16",
+      "mem-13",
+      "mem-12",
+      "mem-15",
+      "mem-23"
+     ],
+     "relevant": [
+      "mem-11",
+      "mem-13",
+      "mem-16",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      2,
+      6,
+      7
+     ]
+    },
+    {
+     "id": "form-04",
+     "top5": [
+      "mem-23",
+      "mem-12",
+      "mem-13",
+      "mem-15",
+      "mem-14"
+     ],
+     "relevant": [
+      "mem-11",
+      "mem-12",
+      "mem-15",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      2,
+      4,
+      6,
+      8
+     ]
+    },
+    {
+     "id": "form-05",
+     "top5": [
+      "mem-15",
+      "mem-13",
+      "mem-11",
+      "mem-12",
+      "mem-16"
+     ],
+     "relevant": [
+      "mem-11",
+      "mem-13",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      2,
+      3,
+      7
+     ]
+    },
+    {
+     "id": "mig-01",
+     "top5": [
+      "mem-17",
+      "mem-19",
+      "mem-18",
+      "mem-23",
+      "mem-22"
+     ],
+     "relevant": [
+      "mem-17",
+      "mem-18",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      3,
+      7
+     ]
+    },
+    {
+     "id": "mig-02",
+     "top5": [
+      "mem-19",
+      "mem-17",
+      "mem-18",
+      "mem-23",
+      "mem-22"
+     ],
+     "relevant": [
+      "mem-17",
+      "mem-19",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      2,
+      6
+     ]
+    },
+    {
+     "id": "mig-03",
+     "top5": [
+      "mem-20",
+      "mem-17",
+      "mem-18",
+      "mem-19",
+      "mem-23"
+     ],
+     "relevant": [
+      "mem-17",
+      "mem-20",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      2,
+      7
+     ]
+    },
+    {
+     "id": "mig-04",
+     "top5": [
+      "mem-22",
+      "mem-17",
+      "mem-19",
+      "mem-18",
+      "mem-23"
+     ],
+     "relevant": [
+      "mem-17",
+      "mem-18",
+      "mem-22",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      2,
+      4,
+      7
+     ]
+    },
+    {
+     "id": "mig-05",
+     "top5": [
+      "mem-17",
+      "mem-21",
+      "mem-18",
+      "mem-20",
+      "mem-19"
+     ],
+     "relevant": [
+      "mem-17",
+      "mem-21",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      2,
+      8
+     ]
+    }
+   ]
+  },
+  {
+   "model": "mxbai-embed-large",
+   "dim": 1024,
+   "prefixed": true,
+   "cold_load_ms": 5955,
+   "ollama_ps": "NAME                        ID              SIZE      PROCESSOR    CONTEXT    UNTIL              \nmxbai-embed-large:latest    468836162de7    618 MB    100% GPU     512        4 minutes from now    \nnomic-embed-text:latest     0a109f422b47    323 MB    100% GPU     2048       4 minutes from now    \ngemma3:4b                   a2af6cc3eb7f    2.9 GB    100% GPU     8192       2 minutes from now",
+   "warm_ms": {
+    "n": 44,
+    "min": 48,
+    "max": 192,
+    "mean": 72.2,
+    "mean_doc": 74.2,
+    "mean_query": 69.9
+   },
+   "retrieval": {
+    "dim1024_typed": {
+     "recall_at_k": 0.672,
+     "precision_at_k": 0.48,
+     "rr": 0.825,
+     "narrow_recall": 0.9,
+     "scoped_recall": 0.95
+    },
+    "dim1024_open": {
+     "recall_at_k": 0.482,
+     "precision_at_k": 0.33,
+     "rr": 0.629,
+     "narrow_recall": 0.75,
+     "scoped_recall": 0.692
+    },
+    "dim256_typed": {
+     "recall_at_k": 0.684,
+     "precision_at_k": 0.49,
+     "rr": 0.808,
+     "narrow_recall": 0.85,
+     "scoped_recall": 0.95
+    },
+    "dim256_open": {
+     "recall_at_k": 0.465,
+     "precision_at_k": 0.32,
+     "rr": 0.698,
+     "narrow_recall": 0.65,
+     "scoped_recall": 0.667
+    },
+    "dim512_typed": {
+     "recall_at_k": 0.672,
+     "precision_at_k": 0.48,
+     "rr": 0.808,
+     "narrow_recall": 0.9,
+     "scoped_recall": 0.95
+    },
+    "dim512_open": {
+     "recall_at_k": 0.486,
+     "precision_at_k": 0.33,
+     "rr": 0.639,
+     "narrow_recall": 0.725,
+     "scoped_recall": 0.7
+    },
+    "dim768_typed": {
+     "recall_at_k": 0.697,
+     "precision_at_k": 0.5,
+     "rr": 0.8,
+     "narrow_recall": 0.95,
+     "scoped_recall": 0.983
+    },
+    "dim768_open": {
+     "recall_at_k": 0.486,
+     "precision_at_k": 0.33,
+     "rr": 0.671,
+     "narrow_recall": 0.75,
+     "scoped_recall": 0.7
+    }
+   },
+   "per_requirement": [
+    {
+     "id": "api-01",
+     "top5": [
+      "mem-05",
+      "mem-04",
+      "mem-23",
+      "mem-01",
+      "mem-02"
+     ],
+     "relevant": [
+      "mem-01",
+      "mem-02",
+      "mem-23",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      3,
+      4,
+      5,
+      7
+     ]
+    },
+    {
+     "id": "api-02",
+     "top5": [
+      "mem-04",
+      "mem-05",
+      "mem-23",
+      "mem-01",
+      "mem-03"
+     ],
+     "relevant": [
+      "mem-01",
+      "mem-04",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      4,
+      7
+     ]
+    },
+    {
+     "id": "api-03",
+     "top5": [
+      "mem-05",
+      "mem-04",
+      "mem-01",
+      "mem-23",
+      "mem-02"
+     ],
+     "relevant": [
+      "mem-01",
+      "mem-05",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      3,
+      6
+     ]
+    },
+    {
+     "id": "api-04",
+     "top5": [
+      "mem-23",
+      "mem-04",
+      "mem-05",
+      "mem-01",
+      "mem-02"
+     ],
+     "relevant": [
+      "mem-01",
+      "mem-03",
+      "mem-23",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      4,
+      6,
+      7
+     ]
+    },
+    {
+     "id": "api-05",
+     "top5": [
+      "mem-05",
+      "mem-23",
+      "mem-04",
+      "mem-01",
+      "mem-02"
+     ],
+     "relevant": [
+      "mem-01",
+      "mem-02",
+      "mem-04",
+      "mem-23",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      2,
+      3,
+      4,
+      5,
+      7
+     ]
+    },
+    {
+     "id": "auth-01",
+     "top5": [
+      "mem-10",
+      "mem-08",
+      "mem-07",
+      "mem-06",
+      "mem-23"
+     ],
+     "relevant": [
+      "mem-06",
+      "mem-07",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      3,
+      4,
+      7
+     ]
+    },
+    {
+     "id": "auth-02",
+     "top5": [
+      "mem-07",
+      "mem-23",
+      "mem-08",
+      "mem-06",
+      "mem-09"
+     ],
+     "relevant": [
+      "mem-08",
+      "mem-23",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      2,
+      3,
+      7
+     ]
+    },
+    {
+     "id": "auth-03",
+     "top5": [
+      "mem-08",
+      "mem-07",
+      "mem-06",
+      "mem-09",
+      "mem-10"
+     ],
+     "relevant": [
+      "mem-06",
+      "mem-09",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      3,
+      4,
+      7
+     ]
+    },
+    {
+     "id": "auth-04",
+     "top5": [
+      "mem-10",
+      "mem-07",
+      "mem-08",
+      "mem-06",
+      "mem-09"
+     ],
+     "relevant": [
+      "mem-06",
+      "mem-10",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      4,
+      7
+     ]
+    },
+    {
+     "id": "auth-05",
+     "top5": [
+      "mem-06",
+      "mem-07",
+      "mem-08",
+      "mem-09",
+      "mem-23"
+     ],
+     "relevant": [
+      "mem-06",
+      "mem-07",
+      "mem-08",
+      "mem-23",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      2,
+      3,
+      5,
+      7
+     ]
+    },
+    {
+     "id": "form-01",
+     "top5": [
+      "mem-11",
+      "mem-12",
+      "mem-23",
+      "mem-16",
+      "mem-13"
+     ],
+     "relevant": [
+      "mem-11",
+      "mem-12",
+      "mem-15",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      2,
+      6,
+      8
+     ]
+    },
+    {
+     "id": "form-02",
+     "top5": [
+      "mem-14",
+      "mem-11",
+      "mem-23",
+      "mem-15",
+      "mem-12"
+     ],
+     "relevant": [
+      "mem-11",
+      "mem-12",
+      "mem-14",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      2,
+      5,
+      8
+     ]
+    },
+    {
+     "id": "form-03",
+     "top5": [
+      "mem-16",
+      "mem-12",
+      "mem-11",
+      "mem-15",
+      "mem-13"
+     ],
+     "relevant": [
+      "mem-11",
+      "mem-13",
+      "mem-16",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      3,
+      5,
+      7
+     ]
+    },
+    {
+     "id": "form-04",
+     "top5": [
+      "mem-23",
+      "mem-15",
+      "mem-13",
+      "mem-14",
+      "mem-12"
+     ],
+     "relevant": [
+      "mem-11",
+      "mem-12",
+      "mem-15",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      2,
+      5,
+      6,
+      7
+     ]
+    },
+    {
+     "id": "form-05",
+     "top5": [
+      "mem-11",
+      "mem-13",
+      "mem-12",
+      "mem-16",
+      "mem-15"
+     ],
+     "relevant": [
+      "mem-11",
+      "mem-13",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      2,
+      8
+     ]
+    },
+    {
+     "id": "mig-01",
+     "top5": [
+      "mem-17",
+      "mem-18",
+      "mem-22",
+      "mem-19",
+      "mem-23"
+     ],
+     "relevant": [
+      "mem-17",
+      "mem-18",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      2,
+      7
+     ]
+    },
+    {
+     "id": "mig-02",
+     "top5": [
+      "mem-19",
+      "mem-17",
+      "mem-22",
+      "mem-23",
+      "mem-18"
+     ],
+     "relevant": [
+      "mem-17",
+      "mem-19",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      2,
+      7
+     ]
+    },
+    {
+     "id": "mig-03",
+     "top5": [
+      "mem-20",
+      "mem-18",
+      "mem-17",
+      "mem-19",
+      "mem-23"
+     ],
+     "relevant": [
+      "mem-17",
+      "mem-20",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      3,
+      8
+     ]
+    },
+    {
+     "id": "mig-04",
+     "top5": [
+      "mem-22",
+      "mem-19",
+      "mem-17",
+      "mem-18",
+      "mem-23"
+     ],
+     "relevant": [
+      "mem-17",
+      "mem-18",
+      "mem-22",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      3,
+      4,
+      8
+     ]
+    },
+    {
+     "id": "mig-05",
+     "top5": [
+      "mem-21",
+      "mem-20",
+      "mem-18",
+      "mem-17",
+      "mem-22"
+     ],
+     "relevant": [
+      "mem-17",
+      "mem-21",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      4,
+      8
+     ]
+    }
+   ]
+  },
+  {
+   "model": "bge-m3",
+   "dim": 1024,
+   "prefixed": false,
+   "cold_load_ms": 8264,
+   "ollama_ps": "NAME                       ID              SIZE      PROCESSOR    CONTEXT    UNTIL              \nbge-m3:latest              790764642607    664 MB    100% GPU     4096       4 minutes from now    \nnomic-embed-text:latest    0a109f422b47    323 MB    100% GPU     2048       4 minutes from now    \ngemma3:4b                  a2af6cc3eb7f    2.9 GB    100% GPU     8192       2 minutes from now",
+   "warm_ms": {
+    "n": 44,
+    "min": 78,
+    "max": 207,
+    "mean": 98.9,
+    "mean_doc": 94.0,
+    "mean_query": 104.8
+   },
+   "retrieval": {
+    "dim1024_typed": {
+     "recall_at_k": 0.695,
+     "precision_at_k": 0.49,
+     "rr": 0.863,
+     "narrow_recall": 0.85,
+     "scoped_recall": 0.887
+    },
+    "dim1024_open": {
+     "recall_at_k": 0.401,
+     "precision_at_k": 0.27,
+     "rr": 0.651,
+     "narrow_recall": 0.65,
+     "scoped_recall": 0.579
+    },
+    "dim256_typed": {
+     "recall_at_k": 0.733,
+     "precision_at_k": 0.52,
+     "rr": 0.85,
+     "narrow_recall": 1.0,
+     "scoped_recall": 0.954
+    },
+    "dim256_open": {
+     "recall_at_k": 0.38,
+     "precision_at_k": 0.26,
+     "rr": 0.656,
+     "narrow_recall": 0.6,
+     "scoped_recall": 0.546
+    },
+    "dim512_typed": {
+     "recall_at_k": 0.691,
+     "precision_at_k": 0.48,
+     "rr": 0.885,
+     "narrow_recall": 0.8,
+     "scoped_recall": 0.821
+    },
+    "dim512_open": {
+     "recall_at_k": 0.38,
+     "precision_at_k": 0.26,
+     "rr": 0.655,
+     "narrow_recall": 0.6,
+     "scoped_recall": 0.546
+    },
+    "dim768_typed": {
+     "recall_at_k": 0.728,
+     "precision_at_k": 0.51,
+     "rr": 0.887,
+     "narrow_recall": 0.85,
+     "scoped_recall": 0.871
+    },
+    "dim768_open": {
+     "recall_at_k": 0.367,
+     "precision_at_k": 0.25,
+     "rr": 0.648,
+     "narrow_recall": 0.575,
+     "scoped_recall": 0.529
+    }
+   },
+   "per_requirement": [
+    {
+     "id": "api-01",
+     "top5": [
+      "mem-01",
+      "mem-05",
+      "mem-04",
+      "mem-23",
+      "mem-03"
+     ],
+     "relevant": [
+      "mem-01",
+      "mem-02",
+      "mem-23",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      4,
+      6,
+      7
+     ]
+    },
+    {
+     "id": "api-02",
+     "top5": [
+      "mem-01",
+      "mem-04",
+      "mem-05",
+      "mem-03",
+      "mem-23"
+     ],
+     "relevant": [
+      "mem-01",
+      "mem-04",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      2,
+      6
+     ]
+    },
+    {
+     "id": "api-03",
+     "top5": [
+      "mem-01",
+      "mem-05",
+      "mem-04",
+      "mem-24",
+      "mem-02"
+     ],
+     "relevant": [
+      "mem-01",
+      "mem-05",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      2,
+      4
+     ]
+    },
+    {
+     "id": "api-04",
+     "top5": [
+      "mem-04",
+      "mem-01",
+      "mem-23",
+      "mem-05",
+      "mem-24"
+     ],
+     "relevant": [
+      "mem-01",
+      "mem-03",
+      "mem-23",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      2,
+      3,
+      5,
+      7
+     ]
+    },
+    {
+     "id": "api-05",
+     "top5": [
+      "mem-05",
+      "mem-01",
+      "mem-04",
+      "mem-23",
+      "mem-02"
+     ],
+     "relevant": [
+      "mem-01",
+      "mem-02",
+      "mem-04",
+      "mem-23",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      2,
+      3,
+      4,
+      5,
+      6
+     ]
+    },
+    {
+     "id": "auth-01",
+     "top5": [
+      "mem-10",
+      "mem-06",
+      "mem-07",
+      "mem-08",
+      "mem-23"
+     ],
+     "relevant": [
+      "mem-06",
+      "mem-07",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      2,
+      3,
+      7
+     ]
+    },
+    {
+     "id": "auth-02",
+     "top5": [
+      "mem-08",
+      "mem-07",
+      "mem-23",
+      "mem-10",
+      "mem-09"
+     ],
+     "relevant": [
+      "mem-08",
+      "mem-23",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      3,
+      7
+     ]
+    },
+    {
+     "id": "auth-03",
+     "top5": [
+      "mem-06",
+      "mem-10",
+      "mem-08",
+      "mem-07",
+      "mem-09"
+     ],
+     "relevant": [
+      "mem-06",
+      "mem-09",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      5,
+      7
+     ]
+    },
+    {
+     "id": "auth-04",
+     "top5": [
+      "mem-10",
+      "mem-06",
+      "mem-07",
+      "mem-08",
+      "mem-23"
+     ],
+     "relevant": [
+      "mem-06",
+      "mem-10",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      2,
+      7
+     ]
+    },
+    {
+     "id": "auth-05",
+     "top5": [
+      "mem-10",
+      "mem-07",
+      "mem-06",
+      "mem-09",
+      "mem-08"
+     ],
+     "relevant": [
+      "mem-06",
+      "mem-07",
+      "mem-08",
+      "mem-23",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      2,
+      3,
+      5,
+      6,
+      7
+     ]
+    },
+    {
+     "id": "form-01",
+     "top5": [
+      "mem-11",
+      "mem-16",
+      "mem-23",
+      "mem-13",
+      "mem-12"
+     ],
+     "relevant": [
+      "mem-11",
+      "mem-12",
+      "mem-15",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      5,
+      7,
+      8
+     ]
+    },
+    {
+     "id": "form-02",
+     "top5": [
+      "mem-14",
+      "mem-12",
+      "mem-16",
+      "mem-15",
+      "mem-11"
+     ],
+     "relevant": [
+      "mem-11",
+      "mem-12",
+      "mem-14",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      2,
+      5,
+      7
+     ]
+    },
+    {
+     "id": "form-03",
+     "top5": [
+      "mem-16",
+      "mem-13",
+      "mem-12",
+      "mem-24",
+      "mem-14"
+     ],
+     "relevant": [
+      "mem-11",
+      "mem-13",
+      "mem-16",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      2,
+      4,
+      7
+     ]
+    },
+    {
+     "id": "form-04",
+     "top5": [
+      "mem-13",
+      "mem-14",
+      "mem-16",
+      "mem-15",
+      "mem-23"
+     ],
+     "relevant": [
+      "mem-11",
+      "mem-12",
+      "mem-15",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      4,
+      6,
+      7,
+      8
+     ]
+    },
+    {
+     "id": "form-05",
+     "top5": [
+      "mem-13",
+      "mem-16",
+      "mem-15",
+      "mem-12",
+      "mem-11"
+     ],
+     "relevant": [
+      "mem-11",
+      "mem-13",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      5,
+      7
+     ]
+    },
+    {
+     "id": "mig-01",
+     "top5": [
+      "mem-18",
+      "mem-19",
+      "mem-17",
+      "mem-20",
+      "mem-24"
+     ],
+     "relevant": [
+      "mem-17",
+      "mem-18",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      3,
+      5
+     ]
+    },
+    {
+     "id": "mig-02",
+     "top5": [
+      "mem-19",
+      "mem-17",
+      "mem-23",
+      "mem-18",
+      "mem-22"
+     ],
+     "relevant": [
+      "mem-17",
+      "mem-19",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      2,
+      6
+     ]
+    },
+    {
+     "id": "mig-03",
+     "top5": [
+      "mem-20",
+      "mem-19",
+      "mem-18",
+      "mem-21",
+      "mem-17"
+     ],
+     "relevant": [
+      "mem-17",
+      "mem-20",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      5,
+      6
+     ]
+    },
+    {
+     "id": "mig-04",
+     "top5": [
+      "mem-22",
+      "mem-18",
+      "mem-19",
+      "mem-17",
+      "mem-24"
+     ],
+     "relevant": [
+      "mem-17",
+      "mem-18",
+      "mem-22",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      2,
+      4,
+      5
+     ]
+    },
+    {
+     "id": "mig-05",
+     "top5": [
+      "mem-21",
+      "mem-18",
+      "mem-20",
+      "mem-17",
+      "mem-22"
+     ],
+     "relevant": [
+      "mem-17",
+      "mem-21",
+      "mem-24"
+     ],
+     "hit_ranks": [
+      1,
+      4,
+      8
+     ]
+    }
+   ]
+  }
+ ],
+ "coresidency": {
+  "generation": "gemma3:4b",
+  "embedding": "embeddinggemma",
+  "ps": "NAME                     ID              SIZE      PROCESSOR    CONTEXT    UNTIL              \nembeddinggemma:latest    85462619ee72    681 MB    100% GPU     2048       4 minutes from now    \ngemma3:4b                a2af6cc3eb7f    2.9 GB    100% GPU     8192       4 minutes from now    \nbge-m3:latest            790764642607    664 MB    100% GPU     4096       4 minutes from now"
+ }
+}

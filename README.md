@@ -5,7 +5,7 @@ your corrections as inspectable memory so it stops repeating the same mistakes.
 
 Inference runs on a local model by default. No requirement or test data leaves the machine.
 
-**Status: planning.** Document set and one research spike. No application code yet.
+**Status: planning.** Document set and two research spikes. No application code yet.
 
 ---
 
@@ -51,19 +51,24 @@ Distributable DOCX and PDF are generated from these sources into [`docs/dist/`](
 
 ## What has been measured
 
-One spike. Everything else in the document set is reasoning, not evidence.
+Two spikes. Everything else in the document set is reasoning, not evidence.
 
-| Finding | Detail |
-|---|---|
-| A local model holds the test plan schema | 12 of 12 valid on first attempt across three candidates |
-| The 4B-parameter class fits the hardware | 2.9 to 3.9 GB resident at 8K context, fully GPU-offloaded on a 6 GB card |
-| Latency has substantial headroom | 9 to 26 s warm generation, against a 90 s provisional target for the whole pipeline |
-| Cold model load is a separate cost | 115 s cold against 18 to 21 s warm for the same model |
-| The recorded hardware assumption was wrong | 6 GB, not 8 GB. Found before any code was written |
+| Finding | Detail | Source |
+|---|---|---|
+| A local model holds the test plan schema | 12 of 12 valid on first attempt across three candidates | SPK-001 |
+| The 4B-parameter class fits the hardware | 2.9 to 3.9 GB resident at 8K context, fully GPU-offloaded on a 6 GB card | SPK-001 |
+| Latency has substantial headroom | 9 to 26 s warm generation, against a 90 s provisional target for the whole pipeline | SPK-001 |
+| Cold model load is a separate cost | 115 s cold against 18 to 21 s warm for the same model | SPK-001 |
+| The recorded hardware assumption was wrong | 6 GB, not 8 GB. Found before any code was written | SPK-001 |
+| Retrieval matches rules to differently-worded requirements | 0.900 MRR, 1.000 narrow recall@5 across 71 labelled pairs at 0.06 mean token overlap | SPK-002 |
+| Embeddings beat lexical ranking, though not by default | BM25 matches on recall once a type filter is applied; it collapses without one | SPK-002 |
+| Both models fit on the card together | 2.9 GB generation plus 681 MB embedding, both fully GPU-offloaded | SPK-002 |
+| A rule that applies to everything cannot be retrieved by similarity | Ranked outside the top five by all five candidates, every time. It belongs outside the index | SPK-002 |
 
-Sample size is four requirements per model, which is enough to close the hardware question and not
-enough to select a model. Method, raw output, and limitations:
-[NOVA-SPK-001](docs/spikes/2026-09-07-model-selection.md).
+Sample sizes are four requirements per model for SPK-001, which closes the hardware question and
+does not select a model, and 20 requirements against 24 rules for SPK-002. Method, raw output, and
+limitations: [NOVA-SPK-001](docs/spikes/2026-09-07-model-selection.md),
+[NOVA-SPK-002](docs/spikes/2026-09-08-embedding-selection.md).
 
 ## On claims
 
