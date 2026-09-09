@@ -5,7 +5,7 @@ implementation. Each produces a report with a stated method, raw output, and lim
 
 | ID | Spike | Date | Status | Outcome |
 |---|---|---|---|---|
-| NOVA-SPK-001 | [Local model selection under a 6 GB VRAM ceiling](2026-09-07-model-selection.md) | 2026-09-07 | Partial | The 4B-parameter class holds the test plan schema at 9 to 26 s warm, fully GPU-resident. The 8B class remains unmeasured |
+| NOVA-SPK-001 | [Local model selection under a 6 GB VRAM ceiling](2026-09-07-model-selection.md) | 2026-09-07, completed 2026-09-08 | Complete | `gemma3:4b`. 100 of 100 schema-conformant across five candidates, 17.3 s median, 2.9 GB fully GPU-resident. The 8B class spills a third onto the CPU for no quality gain |
 | NOVA-SPK-002 | [Embedding model and vector dimension](2026-09-08-embedding-selection.md) | 2026-09-08 | Complete | `embeddinggemma` at 768 dimensions. Leads every discriminating retrieval metric across five candidates, 77 ms warm, co-resident with the generation model inside 6 GB |
 
 ## Planned

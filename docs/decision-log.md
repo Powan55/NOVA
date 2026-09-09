@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Document ID | NOVA-DL-001 |
-| Version | 0.2 |
+| Version | 0.3 |
 | Status | Draft |
 | Owner | Laxmi Poudel |
 | Date | 2026-09-08 |
@@ -63,12 +63,12 @@ of the project.
 | ID | Decision | Status | Evidence to date | Next action |
 |---|---|---|---|---|
 | DL-021 | Hardware provides 6 GB VRAM, not 8 GB or greater | Accepted, corrected by measurement | RTX 4050 Laptop, 6141 MiB, measured 2026-09-07 | Planning had recorded 8 GB or greater. The candidate model list was revised throughout the document set |
-| DL-022 | Model class fixed at 4B parameters rather than 8 to 9B | Provisional | Three candidates measured. 12 of 12 schema-conformant, 2.9 to 3.9 GB resident, fully GPU-offloaded, 9 to 26 s warm | Complete the run across all cases and candidates before this becomes Accepted |
-| DL-023 | Specific model and quantization | Open | At a sample of four per model, one candidate leads on content quality, another on latency, a third is weakest on coverage | A sample of four cannot separate them. Decide following the complete run |
-| DL-024 | Single-stage constrained generation rather than reason-then-structure | Provisional | Structural conformance was complete at single stage across every measured candidate | Revisit only if content quality proves weak on the complete run. Two-stage generation costs an additional inference call |
+| DL-022 | Model class fixed at 4B parameters rather than 8 to 9B | Accepted | Five candidates over twenty requirements. The 4B class is 2.9 to 3.9 GB and fully GPU-offloaded; both 8B candidates need 6.6 GB, run about a third on the CPU, and are 2.4 times slower for no quality gain | Settled by the full run on 2026-09-08 |
+| DL-023 | Specific model and quantization | Accepted | `gemma3:4b` at its default quantization. Leads content quality at 0.988 AC coverage and 0.988 required case types over twenty requirements, no hallucinated criterion references, smallest footprint at 2.9 GB | Chosen over a 7 s median latency advantage elsewhere, because the faster candidates each carry a coverage or accuracy deficit |
+| DL-024 | Single-stage constrained generation rather than reason-then-structure | Accepted | 100 of 100 valid on first attempt at single stage, across five models and twenty requirements | The complete run showed no structural weakness to justify a second inference call |
 | DL-025 | Thinking disabled on hybrid reasoning models | Accepted | Required for one candidate family. Reasoning tokens dominate generation duration and interact poorly with constrained decoding | A configuration requirement, not an optimization |
 | DL-026 | Embedding model and vector dimension | Accepted | `embeddinggemma` at 768 dimensions. Five candidates measured against 71 hand-labelled pairs: first on every discriminating metric, 77 ms warm, 681 MB resident, co-resident with the generation model inside 6 GB | Decided in [ADR-0005](adr/0005-select-an-embedding-model-and-vector-dimension.md) on the evidence in NOVA-SPK-002. Revisit when authentic corrections exist in volume |
-| DL-027 | Whether the 8B class fits within the VRAM budget | Open | Two candidates retrieved, neither measured | Measure residency and offload distribution |
+| DL-027 | Whether the 8B class fits within the VRAM budget | Accepted | It does not. Both candidates load at 6.6 GB against 6141 MiB, running 36% and 38% on the CPU, at 40 to 44 s median against 17.3 s | R-08 closed on the measurement. Revisit only on different hardware |
 | DL-028 | Duplicate similarity and structural similarity thresholds | Open | None | Derive from measured distributions, then fix |
 | DL-029 | Always-apply memories are held outside the vector index rather than retrieved by similarity | Provisional | A rule labelled relevant to all twenty requirements was ranked 6th to 8th by every one of five candidates, for every requirement. It accounts for the entire gap between recall@5 of 0.701 and scoped recall of 0.967 | A content-free rule gives semantic ranking nothing to match on. Settle the memory entity's treatment of scope before the M3 schema |
 
@@ -113,3 +113,4 @@ of the project.
 |---|---|---|---|
 | 0.1 | 2026-09-08 | Laxmi Poudel | Initial draft |
 | 0.2 | 2026-09-08 | Laxmi Poudel | DL-026 accepted. DL-029 added: always-apply memories held outside the vector index |
+| 0.3 | 2026-09-08 | Laxmi Poudel | DL-022, DL-023, DL-024 and DL-027 accepted on the full model run |

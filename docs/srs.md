@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Document ID | NOVA-SRS-001 |
-| Version | 0.2 |
+| Version | 0.3 |
 | Status | Draft |
 | Owner | Laxmi Poudel |
 | Date | 2026-09-08 |
@@ -450,7 +450,7 @@ method and the results are recorded.
 | ID | Dependency | Status |
 |---|---|---|
 | DEP-1 | Inference runtime, host-resident | Installed |
-| DEP-2 | Model weights | Five candidates retrieved |
+| DEP-2 | Model weights | `gemma3:4b` for generation, `embeddinggemma` for embedding. Both selected by measurement |
 | DEP-3 | Relational datastore with vector indexing | Not provisioned |
 | DEP-4 | Container runtime | Installed, not running |
 | DEP-5 | Embedding model, and consequently the vector dimension | `embeddinggemma`, 768 dimensions. Selected 2026-09-08 |
@@ -481,3 +481,4 @@ method and the results are recorded.
 |---|---|---|---|
 | 0.1 | 2026-09-08 | Laxmi Poudel | Initial draft |
 | 0.2 | 2026-09-08 | Laxmi Poudel | CON-7 recorded in the baseline. DEP-5 resolved: embedding model and vector dimension selected |
+| 0.3 | 2026-09-08 | Laxmi Poudel | DEP-2 resolved: generation and embedding models selected by measurement |

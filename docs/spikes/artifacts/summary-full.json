@@ -1,0 +1,62 @@
+[
+ {
+  "model": "gemma3:4b",
+  "n": 20,
+  "errors": 0,
+  "validity": 1.0,
+  "ac_coverage": 0.988,
+  "required_types": 0.988,
+  "mean_cases": 5.5,
+  "hallucinated_acs": 0,
+  "p50_s": 17.3,
+  "p95_s": 24.7
+ },
+ {
+  "model": "phi4-mini",
+  "n": 20,
+  "errors": 0,
+  "validity": 1.0,
+  "ac_coverage": 0.975,
+  "required_types": 0.867,
+  "mean_cases": 4.8,
+  "hallucinated_acs": 0,
+  "p50_s": 11.8,
+  "p95_s": 16.6
+ },
+ {
+  "model": "qwen3:4b",
+  "n": 20,
+  "errors": 0,
+  "validity": 1.0,
+  "ac_coverage": 0.9,
+  "required_types": 0.983,
+  "mean_cases": 4.2,
+  "hallucinated_acs": 2,
+  "p50_s": 11.3,
+  "p95_s": 17.6
+ },
+ {
+  "model": "qwen3:8b",
+  "n": 20,
+  "errors": 0,
+  "validity": 1.0,
+  "ac_coverage": 0.988,
+  "required_types": 0.983,
+  "mean_cases": 4.7,
+  "hallucinated_acs": 0,
+  "p50_s": 46.7,
+  "p95_s": 93.2
+ },
+ {
+  "model": "granite3.3:8b",
+  "n": 20,
+  "errors": 0,
+  "validity": 1.0,
+  "ac_coverage": 0.975,
+  "required_types": 0.942,
+  "mean_cases": 3.5,
+  "hallucinated_acs": 0,
+  "p50_s": 41.0,
+  "p95_s": 68.8
+ }
+]

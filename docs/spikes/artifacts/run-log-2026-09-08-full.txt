@@ -1,0 +1,188 @@
+
+=== gemma3:4b  (num_ctx=8192, n=20) ===
+  api-01   ok   24.4s   6c  ac=100% types=100%
+  api-02   ok   19.6s   7c  ac=75% types=100%
+  api-03   ok   15.9s   5c  ac=100% types=75%
+  api-04   ok   24.7s   9c  ac=100% types=100%
+  api-05   ok   17.9s   6c  ac=100% types=100%
+  auth-01  ok   13.7s   5c  ac=100% types=100%
+  auth-02  ok   15.6s   4c  ac=100% types=100%
+  auth-03  ok   10.7s   4c  ac=100% types=100%
+  auth-04  ok   12.4s   4c  ac=100% types=100%
+  auth-05  ok   16.1s   5c  ac=100% types=100%
+  form-01  ok   15.5s   5c  ac=100% types=100%
+  form-02  ok   18.4s   6c  ac=100% types=100%
+  form-03  ok   17.3s   5c  ac=100% types=100%
+  form-04  ok   23.3s   8c  ac=100% types=100%
+  form-05  ok   17.3s   5c  ac=100% types=100%
+  mig-01   ok   16.9s   5c  ac=100% types=100%
+  mig-02   ok   13.1s   4c  ac=100% types=100%
+  mig-03   ok   17.4s   6c  ac=100% types=100%
+  mig-04   ok   20.6s   5c  ac=100% types=100%
+  mig-05   ok   18.0s   6c  ac=100% types=100%
+  -> validity=100% ac=0.988 types=0.988 p50=17.3s p95=24.7s
+  -> NAME         ID              SIZE      PROCESSOR    CONTEXT    UNTIL              
+gemma3:4b    a2af6cc3eb7f    2.9 GB    100% GPU     8192       4 minutes from now
+
+=== phi4-mini  (num_ctx=8192, n=20) ===
+  api-01   ok   14.5s   4c  ac=100% types=100%
+  api-02   ok    8.8s   4c  ac=100% types=100%
+  api-03   ok   10.0s   5c  ac=75% types=100%
+  api-04   ok   16.0s   8c  ac=100% types=100%
+  api-05   ok   10.1s   5c  ac=100% types=100%
+  auth-01  ok    7.9s   3c  ac=100% types=67%
+  auth-02  ok    9.8s   4c  ac=100% types=67%
+  auth-03  ok    9.2s   4c  ac=100% types=67%
+  auth-04  ok   12.5s   5c  ac=100% types=67%
+  auth-05  ok   12.2s   5c  ac=100% types=67%
+  form-01  ok    8.1s   4c  ac=100% types=100%
+  form-02  ok    9.0s   4c  ac=75% types=100%
+  form-03  ok   16.2s   6c  ac=100% types=100%
+  form-04  ok   14.7s   6c  ac=100% types=100%
+  form-05  ok   13.2s   5c  ac=100% types=100%
+  mig-01   ok   11.8s   5c  ac=100% types=100%
+  mig-02   ok   12.1s   5c  ac=100% types=100%
+  mig-03   ok    7.7s   3c  ac=100% types=33%
+  mig-04   ok   10.4s   3c  ac=100% types=100%
+  mig-05   ok   16.6s   8c  ac=100% types=67%
+  -> validity=100% ac=0.975 types=0.867 p50=11.8s p95=16.6s
+  -> NAME                ID              SIZE      PROCESSOR    CONTEXT    UNTIL              
+phi4-mini:latest    78fad5d182a7    3.6 GB    100% GPU     8192       4 minutes from now
+
+=== qwen3:4b  (num_ctx=8192, n=20) ===
+  api-01   ok   14.1s   4c  ac=50% types=100%
+  api-02   ok   11.3s   5c  ac=75% types=100%
+  api-03   ok   11.2s   4c  ac=50% types=100%
+  api-04   ok    7.9s   4c  ac=50% types=100%
+  api-05   ok   10.6s   4c  ac=100% types=100%
+  auth-01  ok    9.9s   4c  ac=100% types=100%
+  auth-02  ok   11.2s   4c  ac=100% types=100%
+  auth-03  ok   10.1s   4c  ac=100% types=100%
+  auth-04  ok   13.6s   5c  ac=100% types=100%
+  auth-05  ok    9.6s   4c  ac=100% types=67%
+  form-01  ok   13.4s   6c  ac=100% types=100%
+  form-02  ok   16.9s   7c  ac=100% types=100%
+  form-03  ok    7.4s   3c  ac=75% types=100%
+  form-04  ok   15.4s   6c  ac=100% types=100%
+  form-05  ok   10.2s   4c  ac=100% types=100%
+  mig-01   ok   11.7s   5c  ac=100% types=100%
+  mig-02   ok    9.7s   3c  ac=100% types=100%
+  mig-03   ok   11.5s   3c  ac=100% types=100%
+  mig-04   ok   17.6s   3c  ac=100% types=100%
+  mig-05   ok   12.1s   3c  ac=100% types=100%
+  -> validity=100% ac=0.9 types=0.983 p50=11.3s p95=17.6s
+  -> NAME        ID              SIZE      PROCESSOR    CONTEXT    UNTIL              
+qwen3:4b    359d7dd4bcda    3.9 GB    100% GPU     8192       4 minutes from now
+
+=== qwen3:8b  (num_ctx=8192, n=20) ===
+  api-01   ok   75.1s   5c  ac=100% types=100%
+  api-02   ok   56.3s   6c  ac=75% types=100%
+  api-03   ok   50.0s   5c  ac=100% types=100%
+  api-04   ok   43.6s   5c  ac=100% types=100%
+  api-05   ok   37.1s   4c  ac=100% types=100%
+  auth-01  ok   39.4s   4c  ac=100% types=100%
+  auth-02  ok   40.9s   4c  ac=100% types=100%
+  auth-03  ok   35.3s   4c  ac=100% types=100%
+  auth-04  ok   59.9s   6c  ac=100% types=100%
+  auth-05  ok   47.4s   4c  ac=100% types=67%
+  form-01  ok   39.6s   4c  ac=100% types=100%
+  form-02  ok   54.2s   6c  ac=100% types=100%
+  form-03  ok   93.2s   7c  ac=100% types=100%
+  form-04  ok   62.9s   7c  ac=100% types=100%
+  form-05  ok   50.6s   5c  ac=100% types=100%
+  mig-01   ok   38.3s   3c  ac=100% types=100%
+  mig-02   ok   37.3s   3c  ac=100% types=100%
+  mig-03   ok   46.7s   4c  ac=100% types=100%
+  mig-04   ok   34.7s   3c  ac=100% types=100%
+  mig-05   ok   40.3s   4c  ac=100% types=100%
+  -> validity=100% ac=0.988 types=0.983 p50=46.7s p95=93.2s
+  -> NAME        ID              SIZE      PROCESSOR          CONTEXT    UNTIL              
+qwen3:8b    500a1f067a9f    6.6 GB    36%/64% CPU/GPU    8192       4 minutes from now
+
+=== granite3.3:8b  (num_ctx=8192, n=20) ===
+  api-01   ok   43.0s   3c  ac=100% types=75%
+  api-02   ok   46.5s   4c  ac=100% types=100%
+  api-03   ok   39.3s   3c  ac=100% types=75%
+  api-04   ok   45.1s   5c  ac=75% types=100%
+  api-05   ok   53.6s   4c  ac=100% types=100%
+  auth-01  ok   40.3s   3c  ac=100% types=100%
+  auth-02  ok   32.1s   3c  ac=100% types=100%
+  auth-03  ok   41.6s   4c  ac=100% types=100%
+  auth-04  ok   31.6s   3c  ac=100% types=67%
+  auth-05  ok   41.0s   3c  ac=100% types=100%
+  form-01  ok   37.8s   4c  ac=100% types=100%
+  form-02  ok   38.0s   3c  ac=100% types=100%
+  form-03  ok   68.8s   5c  ac=100% types=100%
+  form-04  ok   49.2s   4c  ac=100% types=67%
+  form-05  ok   34.5s   3c  ac=100% types=100%
+  mig-01   ok   38.1s   3c  ac=75% types=100%
+  mig-02   ok   45.8s   3c  ac=100% types=100%
+  mig-03   ok   35.1s   3c  ac=100% types=100%
+  mig-04   ok   56.2s   3c  ac=100% types=100%
+  mig-05   ok   34.6s   3c  ac=100% types=100%
+  -> validity=100% ac=0.975 types=0.942 p50=41.0s p95=68.8s
+  -> NAME             ID              SIZE      PROCESSOR          CONTEXT    UNTIL              
+granite3.3:8b    fd429f23b909    6.6 GB    38%/62% CPU/GPU    8192       4 minutes from now
+
+[
+ {
+  "model": "gemma3:4b",
+  "n": 20,
+  "errors": 0,
+  "validity": 1.0,
+  "ac_coverage": 0.988,
+  "required_types": 0.988,
+  "mean_cases": 5.5,
+  "hallucinated_acs": 0,
+  "p50_s": 17.3,
+  "p95_s": 24.7
+ },
+ {
+  "model": "phi4-mini",
+  "n": 20,
+  "errors": 0,
+  "validity": 1.0,
+  "ac_coverage": 0.975,
+  "required_types": 0.867,
+  "mean_cases": 4.8,
+  "hallucinated_acs": 0,
+  "p50_s": 11.8,
+  "p95_s": 16.6
+ },
+ {
+  "model": "qwen3:4b",
+  "n": 20,
+  "errors": 0,
+  "validity": 1.0,
+  "ac_coverage": 0.9,
+  "required_types": 0.983,
+  "mean_cases": 4.2,
+  "hallucinated_acs": 2,
+  "p50_s": 11.3,
+  "p95_s": 17.6
+ },
+ {
+  "model": "qwen3:8b",
+  "n": 20,
+  "errors": 0,
+  "validity": 1.0,
+  "ac_coverage": 0.988,
+  "required_types": 0.983,
+  "mean_cases": 4.7,
+  "hallucinated_acs": 0,
+  "p50_s": 46.7,
+  "p95_s": 93.2
+ },
+ {
+  "model": "granite3.3:8b",
+  "n": 20,
+  "errors": 0,
+  "validity": 1.0,
+  "ac_coverage": 0.975,
+  "required_types": 0.942,
+  "mean_cases": 3.5,
+  "hallucinated_acs": 0,
+  "p50_s": 41.0,
+  "p95_s": 68.8
+ }
+]

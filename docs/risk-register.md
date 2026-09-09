@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Document ID | NOVA-RR-001 |
-| Version | 0.2 |
+| Version | 0.3 |
 | Status | Draft |
 | Owner | Laxmi Poudel |
 | Date | 2026-09-08 |
@@ -33,7 +33,8 @@ undermines the evidence for the claim.
 Response strategies follow ISO 31000: **avoid**, **reduce**, **transfer**, **accept**.
 
 A risk closes only when evidence closes it. A planned mitigation does not close a risk, and neither
-does elapsed time.
+does elapsed time. A closed risk keeps the identifier it was tracked under and moves to section 3;
+the `R-Cn` identifiers belong to risks that were identified and closed without ever being active.
 
 ## 2. Active risks
 
@@ -45,7 +46,6 @@ does elapsed time.
 | R-05 | The Correction Recurrence Rate depends on a structural similarity threshold that is difficult to defend, and the primary metric is only as sound as that choice | Medium | High | Reduce | Threshold derived from measured distributions, documented, held constant across runs, and always reported alongside retrieval precision so that a memory retrieved and disregarded is distinguishable from one never retrieved | The metric moving materially under small threshold perturbation | M5 |
 | R-06 | Available effort falls to the lower bound and the plan exceeds budget | Medium | Medium | Accept | Scope reduction order pre-committed. Decision point at week 6, not week 12 | Cumulative hours tracking below plan at week 6 | Week 6 |
 | R-07 | Provisional values are replaced with optimistic figures under presentation pressure | Medium | Critical | Avoid | Claim discipline recorded in NOVA-SDP-001 §7.6 and reviewed at the start of the final milestone rather than at its end. A placeholder that cannot be filled becomes a removed claim | Any figure appearing without a stated method, sample size, and reference configuration | M7 |
-| R-08 | The 8B parameter class does not fit the 6 GB budget, and was not measured | Medium | Medium | Reduce | Two candidates retrieved and awaiting measurement. Where offload to host memory is required, the resulting latency determines the outcome | Residency measurement exceeding available VRAM | M1 |
 | R-09 | Container-to-host inference reachability is unverified on this platform, and is the most probable early impediment. Anyone reproducing the deployment encounters it | Medium | Medium | Reduce | Half a day allocated. Resolution documented in the repository README | Container unable to reach the host inference endpoint | M1 |
 | R-10 | Output quality on a local model does not reach the acceptance rate target | Medium | Medium | Accept | Target revised openly. Targets are provisional and revision is expected, but is recorded rather than applied silently | Measured acceptance rate materially below target across authentic usage | M5 |
 | R-11 | Persistent injection defences are unproven. The threat is sufficiently novel that the adversarial suite constitutes the only evidence | Medium | High | Reduce | The suite establishes a floor, not a guarantee, and is described as such. The absence of a tool surface carries the substantive protection | Any adversarial scenario reaching stored memory | M5 |
@@ -63,7 +63,8 @@ does elapsed time.
 |---|---|---|
 | R-C1 | Available hardware cannot sustain a local model at acceptable latency and schema fidelity. This was the risk capable of invalidating the primary workflow decision | **Closed by measurement, 2026-09-07.** 4B-parameter class: 12 of 12 schema-conformant on first attempt, 2.9 to 3.9 GB resident, fully GPU-offloaded, 9 to 26 s warm generation. Substantially inside the provisional latency target |
 | R-C2 | The recorded hardware assumption of 8 GB or greater VRAM was incorrect | **Closed, 2026-09-07.** The device provides 6 GB. Identified before any implementation, at a cost of one afternoon rather than a rewrite in the ninth week. The candidate model list was revised and the constraint corrected throughout the document set |
-| R-C3 | The embedding model and vector dimension remained unselected, and the dimension is fixed at schema creation | **Closed by measurement, 2026-09-08.** `embeddinggemma` at 768 dimensions, selected in [ADR-0005](adr/0005-select-an-embedding-model-and-vector-dimension.md) on the evidence in NOVA-SPK-002. Five candidates measured against 71 hand-labelled requirement-to-rule pairs. Schema definition is unblocked |
+| R-04 | The embedding model and vector dimension remained unselected, and the dimension is fixed at schema creation | **Closed by measurement, 2026-09-08.** `embeddinggemma` at 768 dimensions, selected in [ADR-0005](adr/0005-select-an-embedding-model-and-vector-dimension.md) on the evidence in NOVA-SPK-002. Five candidates measured against 71 hand-labelled requirement-to-rule pairs. Schema definition is unblocked |
+| R-08 | The 8B parameter class might not fit the 6 GB budget, and was unmeasured | **Closed by measurement, 2026-09-08.** It does not fit. Both candidates load at 6.6 GB and run 36% to 38% on the CPU, at 40 to 44 s median against 17.3 s for `gemma3:4b`, with no quality gain. The 4B class is confirmed rather than merely assumed |
 
 ## 4. Prerequisites
 
@@ -84,3 +85,4 @@ here once resolved so that the sequencing remains legible.
 |---|---|---|---|
 | 0.1 | 2026-09-08 | Laxmi Poudel | Initial draft |
 | 0.2 | 2026-09-08 | Laxmi Poudel | R-04 closed by measurement as R-C3 |
+| 0.3 | 2026-09-08 | Laxmi Poudel | R-08 closed by measurement as R-C4 |

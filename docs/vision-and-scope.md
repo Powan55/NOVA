@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Document ID | NOVA-VS-001 |
-| Version | 0.2 |
+| Version | 0.3 |
 | Status | Draft |
 | Owner | Laxmi Poudel |
 | Date | 2026-09-08 |
@@ -106,7 +106,7 @@ reasoning behind each output, and measures whether corrections stop recurring**.
 | ID | Dependency | Status |
 |---|---|---|
 | DEP-1 | Ollama runtime | Installed, v0.33.3 |
-| DEP-2 | Local model weights | Five candidates retrieved, approximately 18 GB |
+| DEP-2 | Local model weights | `gemma3:4b` and `embeddinggemma` selected by measurement. 3.6 GB on disk |
 | DEP-3 | PostgreSQL with the pgvector extension | Not provisioned |
 | DEP-4 | Container runtime | Installed, daemon not running |
 | DEP-5 | Local embedding model | Not selected. Blocking, see [ADR-0005](adr/0005-select-an-embedding-model-and-vector-dimension.md) |
@@ -202,3 +202,4 @@ See [SRS section 1.4](srs.md#14-definitions-acronyms-and-abbreviations).
 |---|---|---|---|
 | 0.1 | 2026-09-08 | Laxmi Poudel | Initial draft |
 | 0.2 | 2026-09-08 | Laxmi Poudel | CON-7 recorded in the constraints table |
+| 0.3 | 2026-09-08 | Laxmi Poudel | DEP-2 resolved |

@@ -55,9 +55,10 @@ Two spikes. Everything else in the document set is reasoning, not evidence.
 
 | Finding | Detail | Source |
 |---|---|---|
-| A local model holds the test plan schema | 12 of 12 valid on first attempt across three candidates | SPK-001 |
+| A local model holds the test plan schema | 100 of 100 valid on first attempt, five candidates over twenty requirements | SPK-001 |
 | The 4B-parameter class fits the hardware | 2.9 to 3.9 GB resident at 8K context, fully GPU-offloaded on a 6 GB card | SPK-001 |
-| Latency has substantial headroom | 9 to 26 s warm generation, against a 90 s provisional target for the whole pipeline | SPK-001 |
+| The 8B class does not, and gains nothing anyway | 6.6 GB, a third of it on the CPU, 2.4 times slower, and no better on coverage | SPK-001 |
+| Latency has substantial headroom | 17.3 s median generation, against a 90 s provisional target for the whole pipeline | SPK-001 |
 | Cold model load is a separate cost | 115 s cold against 18 to 21 s warm for the same model | SPK-001 |
 | The recorded hardware assumption was wrong | 6 GB, not 8 GB. Found before any code was written | SPK-001 |
 | Retrieval matches rules to differently-worded requirements | 0.900 MRR, 1.000 narrow recall@5 across 71 labelled pairs at 0.06 mean token overlap | SPK-002 |
@@ -65,8 +66,9 @@ Two spikes. Everything else in the document set is reasoning, not evidence.
 | Both models fit on the card together | 2.9 GB generation plus 681 MB embedding, both fully GPU-offloaded | SPK-002 |
 | A rule that applies to everything cannot be retrieved by similarity | Ranked outside the top five by all five candidates, every time. It belongs outside the index | SPK-002 |
 
-Sample sizes are four requirements per model for SPK-001, which closes the hardware question and
-does not select a model, and 20 requirements against 24 rules for SPK-002. Method, raw output, and
+Sample sizes are 20 requirements per model across five models for SPK-001, and 20 requirements
+against 24 labelled rules for SPK-002. Both are one run at a fixed seed, so run-to-run variance is
+unmeasured, which is what the evaluation harness in M5 exists to fix. Method, raw output, and
 limitations: [NOVA-SPK-001](docs/spikes/2026-09-07-model-selection.md),
 [NOVA-SPK-002](docs/spikes/2026-09-08-embedding-selection.md).
 

@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Document ID | NOVA-SDP-001 |
-| Version | 0.2 |
+| Version | 0.3 |
 | Status | Draft |
 | Owner | Laxmi Poudel |
 | Date | 2026-09-08 |
@@ -137,8 +137,8 @@ Partially complete.
 | Objective | Eliminate the assumptions capable of invalidating the plan. Fix the decisions that are expensive to reverse |
 | Scope | Model selection spike; embedding spike; repository skeleton; datastore with vector extension and migrations; inference gateway with a fake implementation; deployment composition; continuous integration skeleton |
 | Exit criteria | A selected model produces schema-conformant plans at measured latency; embedding model and vector dimension fixed; container-to-host inference reachability verified |
-| Complete | Model selection spike, partial. Three of five candidates measured, harness and raw output committed. Embedding spike complete, five candidates measured, model and dimension fixed |
-| Outstanding | Remaining model measurements; deployment composition; migrations; gateway; continuous integration |
+| Complete | Model selection spike complete: five candidates over twenty requirements, `gemma3:4b` selected. Embedding spike complete: `embeddinggemma` at 768 dimensions |
+| Outstanding | Container-to-host reachability and datastore provisioning; deployment composition; migrations; gateway; continuous integration |
 
 #### M2. Agent workflow, 32 h
 
@@ -290,10 +290,11 @@ Fifteen complete, one partial, two gaps.
 |---|---|---|---|
 | ~~G1~~ | ~~Select the embedding model and fix the vector dimension~~ | ~4 h spent | **Resolved 2026-09-08.** `embeddinggemma` at 768 dimensions, [NOVA-SPK-002](spikes/2026-09-08-embedding-selection.md) and [ADR-0005](adr/0005-select-an-embedding-model-and-vector-dimension.md) |
 | G4 | Verify container-to-host inference reachability and datastore provisioning | ~1 h | Removes the most probable early impediment. Now the only remaining entry condition |
-| G2 | Complete the model selection spike across all cases and candidates | ~3 h, largely unattended | Strongly recommended. A provisional model choice is revisable without rework, unlike the vector dimension |
+| ~~G2~~ | ~~Complete the model selection spike across all cases and candidates~~ | ~2 h spent | **Resolved 2026-09-08.** `gemma3:4b` selected, R-08 closed. [NOVA-SPK-001 v1.1](spikes/2026-09-07-model-selection.md) |
 | G3 | Produce a screen inventory and wireframes for the four views | ~4 h | Required before interface work. Does not block foundation or backend work |
 
-G1 is resolved. G4 is what now stands between the document set and implementation.
+G1 and G2 are resolved. G4 is what now stands between the document set and implementation, and G3
+stands between it and interface work.
 
 ## 6. Technical process plans
 
@@ -510,3 +511,4 @@ None of this permits describing the system as self-training before a trained mod
 |---|---|---|---|
 | 0.1 | 2026-09-08 | Laxmi Poudel | Initial draft |
 | 0.2 | 2026-09-08 | Laxmi Poudel | CON-7 recorded. G1 resolved by NOVA-SPK-002. Entry criterion 10 unblocked. M1 status updated |
+| 0.3 | 2026-09-08 | Laxmi Poudel | G2 resolved by NOVA-SPK-001 v1.1. M1 status updated |

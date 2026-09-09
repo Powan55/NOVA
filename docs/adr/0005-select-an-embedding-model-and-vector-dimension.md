@@ -116,6 +116,6 @@ synthetic-corpus limitation can be removed.
 ## More information
 
 Related: [ADR-0001](0001-use-postgres-with-pgvector-as-sole-datastore.md) establishes why the dimension
-resides in the schema. Evidence: [NOVA-SPK-002](../spikes/2026-09-08-embedding-selection.md). Closed
-R-04 in [NOVA-RR-001](../risk-register.md) and G1 in
+resides in the schema. Evidence: [NOVA-SPK-002](../spikes/2026-09-08-embedding-selection.md). Closed R-04 in
+[NOVA-RR-001](../risk-register.md) and G1 in
 [NOVA-SDP-001 section 5.6](../sdp.md#56-entry-criteria-for-implementation).
