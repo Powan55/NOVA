@@ -96,7 +96,7 @@ would have had to be documented, justified in NOVA-TM-001, and correctly reprodu
 cloning the repository. The deployment view's claim that services carry no inbound surface beyond
 the host holds for the inference runtime as written.
 
-**3. The finding is specific to Docker Desktop, and this is the part that will bite someone else.**
+**3. The finding is specific to Docker Desktop, and this is the part that does not transfer.**
 A Linux-native Docker Engine has no host proxy. There, `host.docker.internal` is undefined unless
 declared, and `host-gateway` maps to the bridge address, which a loopback-bound service does not
 answer on. The remediation R-09 described remains correct for that case, so the script retains it as
@@ -112,7 +112,7 @@ which is `pgvector`'s uncompressed `vector` type behaving exactly as documented.
 volumes in NOVA-SRS-001 the embedding column is not a capacity concern, and the arithmetic is now
 recorded rather than estimated.
 
-**6. The check found one defect, in itself.** The nearest-neighbour insert used a correlated
+**6. The check found a defect in itself.** The nearest-neighbour insert used a correlated
 reference inside `array_agg`, which PostgreSQL rejects as an aggregate over the outer query. The
 first run failed there while the four checks around it passed. A verification script that has never
 run is not evidence, which is the argument for running it before the deployment work rather than
