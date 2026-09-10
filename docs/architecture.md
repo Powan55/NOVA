@@ -326,7 +326,7 @@ flowchart TB
 |---|---|
 | Application containers | Reproducible startup from a clean checkout by a single command |
 | Datastore container with a named volume | State survives container replacement. Backup is a documented dump and restore |
-| Inference on the host, not containerized | GPU passthrough on this platform adds operational friction without benefit. The container-to-host path requires verification and documentation, and is the most likely first-run obstacle for anyone cloning the repository |
+| Inference on the host, not containerized | GPU passthrough on this platform adds operational friction without benefit. The container-to-host path is verified: on Docker Desktop, `host.docker.internal` reaches the runtime on its default loopback binding, so no host-side binding change is required. A Linux-native engine has no equivalent host proxy and needs `OLLAMA_HOST` widened with the port firewalled to the Docker subnet. [NOVA-SPK-003](spikes/2026-09-09-container-to-host-reachability.md) |
 
 ## 8. Crosscutting concepts
 
@@ -529,7 +529,7 @@ flowchart LR
 | R-01 | Correction extraction may not reach usable precision on a local model | High | Measured at a defined checkpoint before dependent interface work. Fallback is user-authored rules with model assistance |
 | R-03 | Inference nondeterminism may exceed evaluation gate margins | High | Variance measured before any threshold is set. Dataset grows rather than thresholds loosening |
 | R-05 | The Correction Recurrence Rate depends on a structural similarity threshold that is difficult to defend | Medium | Threshold fixed from measured distributions, documented, held constant, and always reported alongside retrieval precision |
-| R-09 | Container-to-host inference reachability is unverified on this platform | Medium | Verified before deployment work. Resolution documented |
+| ~~R-09~~ | ~~Container-to-host inference reachability is unverified on this platform~~ | Closed | **Resolved 2026-09-09.** Reachable with the inference runtime on its default loopback binding, through Docker Desktop's host proxy. [NOVA-SPK-003](spikes/2026-09-09-container-to-host-reachability.md) |
 | R-11 | Persistent injection defences are unproven | Medium | The adversarial suite establishes a floor, not a guarantee, and is described as such |
 | R-13 | The model review stage may not justify its latency | Low | Designed to be removable. Measured before and after |
 | R-16 | Introducing any tool capability would invalidate the security model | Low | Recorded so that the consequence is not overlooked. Such a change requires rewriting NOVA-TM-001 rather than amending it |
@@ -551,3 +551,4 @@ See [NOVA-SRS-001 section 1.4](srs.md#14-definitions-acronyms-and-abbreviations)
 | 0.1 | 2026-09-08 | Laxmi Poudel | Initial draft |
 | 0.2 | 2026-09-08 | Laxmi Poudel | Embedding dimension fixed at 768 in section 8.4. R-04 moved to closed |
 | 0.3 | 2026-09-08 | Laxmi Poudel | R-08 moved to closed |
+| 0.4 | 2026-09-09 | Laxmi Poudel | R-09 moved to closed. Section 7 records the verified container-to-host path and the Linux-engine caveat |

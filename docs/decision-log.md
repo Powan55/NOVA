@@ -57,6 +57,7 @@ of the project.
 | DL-018 | Correction Recurrence Rate as the primary metric | Accepted | Acceptance rate; evaluation pass rate | Directly falsifies the central claim and requires no model-based judge | Sensitive to a threshold choice, which must be stated wherever the metric is quoted | The threshold proving indefensible |
 | DL-019 | Fake inference provider for integration testing | Accepted | Real models throughout | Integration tests must be fast and deterministic. Model behaviour belongs to the evaluation sub-process | Integration tests cannot detect model-specific defects | None |
 | DL-020 | Evaluation thresholds derived from measured variance | Accepted | Thresholds set from intent | An unstable gate is disabled in practice, and a disabled gate is worse than none | Thresholds cannot be set until the harness exists and variance is measured | None |
+| DL-030 | The inference runtime stays bound to loopback; containers reach it through Docker Desktop's host proxy | Accepted | Widening `OLLAMA_HOST` to `0.0.0.0` with the port firewalled to the Docker subnet; containerizing inference with GPU passthrough | Measured working on the default binding, so the alternative buys nothing and costs an unauthenticated inference API behind one firewall rule | The deployment is Docker Desktop-specific. A Linux-native engine has no host proxy and needs the widened binding | Deploying on a container runtime without a host proxy |
 
 ## 5. Decisions pending measurement
 
@@ -114,3 +115,4 @@ of the project.
 | 0.1 | 2026-09-08 | Laxmi Poudel | Initial draft |
 | 0.2 | 2026-09-08 | Laxmi Poudel | DL-026 accepted. DL-029 added: always-apply memories held outside the vector index |
 | 0.3 | 2026-09-08 | Laxmi Poudel | DL-022, DL-023, DL-024 and DL-027 accepted on the full model run |
+| 0.4 | 2026-09-09 | Laxmi Poudel | DL-030 added and accepted on the evidence in NOVA-SPK-003 |

@@ -3,8 +3,9 @@
 # vector with a working index?
 #
 # Two questions, both of which have to be answered before any migration is written:
-#   1. Container -> host Ollama over host.docker.internal. Known first-run friction; Ollama binds
-#      loopback by default, so this fails until it is told otherwise.
+#   1. Container -> host Ollama over host.docker.internal. Docker Desktop resolves that name to its
+#      own host proxy, which forwards to the host's loopback, so a default-bound Ollama is
+#      reachable. A Linux-native engine has no such proxy and needs the remediation printed below.
 #   2. pgvector holds vector(768) (ADR-0005), indexes it with HNSW, and answers a nearest-neighbour
 #      query. A dimension that cannot be indexed is not a decision, it is a mistake.
 #
@@ -45,7 +46,8 @@ if [ "$code" = "200" ]; then
 else
   no "container could not reach host.docker.internal:$OLLAMA_PORT (got '${code:-no response}')"
   printf '        fix: set OLLAMA_HOST=0.0.0.0:%s on the host and restart Ollama,\n' "$OLLAMA_PORT"
-  printf '        then restrict the port to the Docker subnet in the host firewall.\n'
+  printf '        then restrict the port to the Docker subnet in the host firewall. Binding\n'
+  printf '        beyond loopback exposes an unauthenticated inference API, so scope the rule.\n'
 fi
 
 step "2. datastore with a $DIM-dimension vector"
@@ -70,7 +72,8 @@ else
   [ "$out" = "indexed" ] && ok "HNSW cosine index built over $DIM dimensions" || no "HNSW index failed: $out"
 
   # Two rows, one near the probe and one far, so the ordering proves the operator is doing something.
-  out=$(sql "INSERT INTO m SELECT g, 1, (SELECT array_agg(CASE WHEN g=1 THEN 1.0 ELSE random() END)::vector FROM generate_series(1,$DIM)) FROM generate_series(1,2) g;
+  out=$(sql "INSERT INTO m VALUES (1, 1, (SELECT array_agg(1.0::real) FROM generate_series(1,$DIM))::vector);
+             INSERT INTO m VALUES (2, 1, (SELECT array_agg(random()::real) FROM generate_series(1,$DIM))::vector);
              SELECT id FROM m ORDER BY embedding <=> (SELECT embedding FROM m WHERE id=1) LIMIT 1;")
   [ "$out" = "1" ] && ok "nearest-neighbour query returns the expected row" || no "ANN query wrong: $out"
 

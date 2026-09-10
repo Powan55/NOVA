@@ -139,7 +139,7 @@ Partially complete.
 | Scope | Model selection spike; embedding spike; repository skeleton; datastore with vector extension and migrations; inference gateway with a fake implementation; deployment composition; continuous integration skeleton |
 | Exit criteria | A selected model produces schema-conformant plans at measured latency; embedding model and vector dimension fixed; container-to-host inference reachability verified |
 | Complete | Model selection spike complete: five candidates over twenty requirements, `gemma3:4b` selected. Embedding spike complete: `embeddinggemma` at 768 dimensions |
-| Outstanding | Container-to-host reachability and datastore provisioning; deployment composition; migrations; gateway; continuous integration |
+| Outstanding | Deployment composition; migrations; gateway; continuous integration |
 
 #### M2. Agent workflow, 32 h
 
@@ -283,19 +283,20 @@ Assessment against the current state of the document set.
 | 17 | Work decomposed into estimable, demonstrable increments | Complete | Section 6.2 |
 | 18 | Acceptance criteria defined | Complete | Section 6.4 |
 
-Sixteen complete, one partial, one gap.
+Seventeen complete, one partial, no gap.
 
 **Outstanding items, in order of consequence.**
 
 | ID | Item | Effort | Rationale |
 |---|---|---|---|
 | ~~G1~~ | ~~Select the embedding model and fix the vector dimension~~ | ~4 h spent | **Resolved 2026-09-08.** `embeddinggemma` at 768 dimensions, [NOVA-SPK-002](spikes/2026-09-08-embedding-selection.md) and [ADR-0005](adr/0005-select-an-embedding-model-and-vector-dimension.md) |
-| G4 | Verify container-to-host inference reachability and datastore provisioning | ~1 h | Removes the most probable early impediment. Now the only remaining entry condition |
+| ~~G4~~ | ~~Verify container-to-host inference reachability and datastore provisioning~~ | ~1 h spent | **Resolved 2026-09-09.** Reachable on the default loopback binding; `vector(768)` indexes and queries correctly. R-09 closed. [NOVA-SPK-003](spikes/2026-09-09-container-to-host-reachability.md) |
 | ~~G2~~ | ~~Complete the model selection spike across all cases and candidates~~ | ~2 h spent | **Resolved 2026-09-08.** `gemma3:4b` selected, R-08 closed. [NOVA-SPK-001 v1.1](spikes/2026-09-07-model-selection.md) |
 | ~~G3~~ | ~~Produce a screen inventory and wireframes for the four views~~ | ~4 h spent | **Resolved 2026-09-08.** [NOVA-UI-001](ui-design.md) |
 
-G1, G2 and G3 are resolved. G4 is the only entry condition still open, and it needs a running
-container runtime rather than more design.
+All four are resolved. No entry condition remains open. Criterion 8 stays partial for the duration
+of the project: CON-2 puts a single reviewer on the architecture, which is recorded as R-17 rather
+than treated as closeable.
 
 ## 6. Technical process plans
 
@@ -515,3 +516,4 @@ None of this permits describing the system as self-training before a trained mod
 | 0.2 | 2026-09-08 | Laxmi Poudel | CON-7 recorded. G1 resolved by NOVA-SPK-002. Entry criterion 10 unblocked. M1 status updated |
 | 0.3 | 2026-09-08 | Laxmi Poudel | G2 resolved by NOVA-SPK-001 v1.1. M1 status updated |
 | 0.4 | 2026-09-08 | Laxmi Poudel | G3 resolved by NOVA-UI-001. Entry criterion 7 closed |
+| 0.5 | 2026-09-09 | Laxmi Poudel | G4 resolved by NOVA-SPK-003. R-09 closed. No entry condition remains open |

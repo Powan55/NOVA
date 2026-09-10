@@ -5,7 +5,7 @@ your corrections as inspectable memory so it stops repeating the same mistakes.
 
 Inference runs on a local model by default. No requirement or test data leaves the machine.
 
-**Status: planning.** Document set and two research spikes. No application code yet.
+**Status: planning.** Document set and three research spikes. No application code yet.
 
 ---
 
@@ -52,7 +52,7 @@ Distributable DOCX and PDF are generated from these sources into [`docs/dist/`](
 
 ## What has been measured
 
-Two spikes. Everything else in the document set is reasoning, not evidence.
+Three spikes. Everything else in the document set is reasoning, not evidence.
 
 | Finding | Detail | Source |
 |---|---|---|
@@ -66,12 +66,18 @@ Two spikes. Everything else in the document set is reasoning, not evidence.
 | Embeddings beat lexical ranking, though not by default | BM25 matches on recall once a type filter is applied; it collapses without one | SPK-002 |
 | Both models fit on the card together | 2.9 GB generation plus 681 MB embedding, both fully GPU-offloaded | SPK-002 |
 | A rule that applies to everything cannot be retrieved by similarity | Ranked outside the top five by all five candidates, every time. It belongs outside the index | SPK-002 |
+| A container reaches the host inference runtime without reconfiguring it | Docker Desktop resolves `host.docker.internal` to its own host proxy, which forwards to loopback. The inference API stays bound to `127.0.0.1` | SPK-003 |
+| The recorded impediment was not one, and the reasoning behind it was wrong | R-09 assumed the container sits outside the host's loopback. It does not sit on the host's network at all | SPK-003 |
+| 768 dimensions survives contact with the schema | `vector(768)` accepted, HNSW cosine index built, nearest-neighbour ordering correct, 3076 bytes per vector | SPK-003 |
 
 Sample sizes are 20 requirements per model across five models for SPK-001, and 20 requirements
 against 24 labelled rules for SPK-002. Both are one run at a fixed seed, so run-to-run variance is
-unmeasured, which is what the evaluation harness in M5 exists to fix. Method, raw output, and
-limitations: [NOVA-SPK-001](docs/spikes/2026-09-07-model-selection.md),
-[NOVA-SPK-002](docs/spikes/2026-09-08-embedding-selection.md).
+unmeasured, which is what the evaluation harness in M5 exists to fix. SPK-003 is one platform and
+one run, and its reachability finding is specific to Docker Desktop: a Linux-native engine has no
+host proxy and still needs the binding widened. Method, raw output, and limitations:
+[NOVA-SPK-001](docs/spikes/2026-09-07-model-selection.md),
+[NOVA-SPK-002](docs/spikes/2026-09-08-embedding-selection.md),
+[NOVA-SPK-003](docs/spikes/2026-09-09-container-to-host-reachability.md).
 
 ## On claims
 
