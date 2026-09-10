@@ -28,6 +28,8 @@ from typing import Any, Protocol
 # silently, so it is checked rather than trusted.
 EMBED_DIM = 768
 
+Schema = dict[str, Any]  # a JSON Schema, passed through to constrained decoding
+
 DEFAULT_URL = os.environ.get("NOVA_INFERENCE_URL", "http://127.0.0.1:11434")
 DEFAULT_GEN_MODEL = os.environ.get("NOVA_GEN_MODEL", "gemma3:4b")
 DEFAULT_EMBED_MODEL = os.environ.get("NOVA_EMBED_MODEL", "embeddinggemma")
@@ -71,13 +73,15 @@ class Health:
 class InferenceGateway(Protocol):
     name: str
 
-    def generate_structured(self, prompt: str, schema: dict, *, system: str | None = None) -> Completion: ...
+    def generate_structured(
+        self, prompt: str, schema: Schema, *, system: str | None = None
+    ) -> Completion: ...
     def generate_text(self, prompt: str, *, system: str | None = None) -> Completion: ...
     def embed(self, text: str) -> Embedding: ...
     def health(self) -> Health: ...
 
 
-def _post(url: str, body: dict, timeout: int) -> dict:
+def _post(url: str, body: dict[str, Any], timeout: int) -> dict[str, Any]:
     request = urllib.request.Request(
         url,
         data=json.dumps(body).encode(),
@@ -85,7 +89,8 @@ def _post(url: str, body: dict, timeout: int) -> dict:
         method="POST",
     )
     with urllib.request.urlopen(request, timeout=timeout) as response:
-        return json.loads(response.read())
+        payload: dict[str, Any] = json.loads(response.read())
+    return payload
 
 
 class OllamaGateway:
@@ -108,7 +113,7 @@ class OllamaGateway:
         self.num_ctx = num_ctx
         self.timeout = timeout
 
-    def _chat(self, prompt: str, system: str | None, schema: dict | None) -> Completion:
+    def _chat(self, prompt: str, system: str | None, schema: Schema | None) -> Completion:
         messages = ([{"role": "system", "content": system}] if system else []) + [
             {"role": "user", "content": prompt}
         ]
@@ -154,7 +159,7 @@ class OllamaGateway:
             data=data,
         )
 
-    def generate_structured(self, prompt: str, schema: dict, *, system: str | None = None) -> Completion:
+    def generate_structured(self, prompt: str, schema: Schema, *, system: str | None = None) -> Completion:
         return self._chat(prompt, system, schema)
 
     def generate_text(self, prompt: str, *, system: str | None = None) -> Completion:
@@ -178,7 +183,8 @@ class OllamaGateway:
                 f"vector({EMBED_DIM}) per ADR-0005. Changing the embedding model requires a "
                 f"migration and a re-embedding of every memory."
             )
-        return Embedding(vector=vector, model=self.embed_model, latency_ms=int((time.perf_counter() - started) * 1000))
+        latency_ms = int((time.perf_counter() - started) * 1000)
+        return Embedding(vector=vector, model=self.embed_model, latency_ms=latency_ms)
 
     def _http_detail(self, exc: urllib.error.HTTPError, model: str) -> str:
         if exc.code == 404:  # FR-11.4: name the model and the action required
@@ -197,8 +203,10 @@ class OllamaGateway:
         missing = [m for m in (self.gen_model, self.embed_model) if m.removesuffix(":latest") not in present]
         if missing:
             pulls = "; ".join(f"ollama pull {m}" for m in missing)
-            return Health(self.name, False, f"model(s) not installed: {', '.join(missing)}. Run: {pulls}", installed)
-        return Health(self.name, True, f"{self.url} ready with {self.gen_model} and {self.embed_model}", installed)
+            detail = f"model(s) not installed: {', '.join(missing)}. Run: {pulls}"
+            return Health(self.name, False, detail, installed)
+        ready = f"{self.url} ready with {self.gen_model} and {self.embed_model}"
+        return Health(self.name, True, ready, installed)
 
 
 class FakeGateway:
@@ -230,7 +238,7 @@ class FakeGateway:
             detail, self._failure = self._failure, None
             raise InferenceError(detail)
 
-    def generate_structured(self, prompt: str, schema: dict, *, system: str | None = None) -> Completion:
+    def generate_structured(self, prompt: str, schema: Schema, *, system: str | None = None) -> Completion:
         self.calls.append(("generate_structured", prompt))
         self._check_failure()
         data = self._queued.pop(0) if self._queued else stub_from_schema(schema)
@@ -265,7 +273,7 @@ def _pseudo_vector(text: str) -> list[float]:
     return [v / norm for v in raw]
 
 
-def stub_from_schema(schema: dict) -> Any:
+def stub_from_schema(schema: Schema) -> Any:
     """The minimal instance satisfying a JSON Schema: required properties, minItems, first enum."""
     if "enum" in schema:
         return schema["enum"][0]
@@ -276,7 +284,7 @@ def stub_from_schema(schema: dict) -> Any:
         return {name: stub_from_schema(properties[name]) for name in required if name in properties}
     if kind == "array":
         return [stub_from_schema(schema.get("items", {})) for _ in range(max(1, schema.get("minItems", 1)))]
-    return {"string": "stub", "integer": 0, "number": 0.0, "boolean": False}.get(kind)
+    return {"string": "stub", "integer": 0, "number": 0.0, "boolean": False}.get(str(kind))
 
 
 def gateway_from_env() -> InferenceGateway:
@@ -286,7 +294,9 @@ def gateway_from_env() -> InferenceGateway:
         return OllamaGateway()
     if provider == "fake":
         return FakeGateway()
-    raise InferenceError(f"unknown inference provider '{provider}'. Set NOVA_INFERENCE_PROVIDER to ollama or fake.")
+    raise InferenceError(
+        f"unknown inference provider '{provider}'. Set NOVA_INFERENCE_PROVIDER to ollama or fake."
+    )
 
 
 def selftest() -> None:

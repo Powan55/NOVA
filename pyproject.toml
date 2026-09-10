@@ -1,0 +1,17 @@
+# Tool configuration only. There is no package to build yet, and a build system for one module
+# would be scaffolding ahead of a need.
+
+[tool.ruff]
+line-length = 110
+target-version = "py312"
+# Spike harnesses are committed evidence, not source. Their reports quote them by line, so they are
+# read and reproduced rather than reformatted.
+extend-exclude = ["docs/spikes/artifacts"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM"]
+
+[tool.mypy]
+python_version = "3.12"
+files = ["nova", "db"]
+strict = true

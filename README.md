@@ -6,8 +6,8 @@ your corrections as inspectable memory so it stops repeating the same mistakes.
 Inference runs on a local model by default. No requirement or test data leaves the machine.
 
 **Status: early implementation.** Document set, three research spikes, and the foundations:
-deployment composition, forward-only migrations, and the inference gateway. No application services
-yet.
+deployment composition, forward-only migrations, the inference gateway, and continuous integration.
+No application services yet.
 
 ---
 

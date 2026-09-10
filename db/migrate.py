@@ -16,6 +16,7 @@ import hashlib
 import os
 import sys
 from pathlib import Path
+from typing import Any
 
 import psycopg
 
@@ -43,6 +44,16 @@ def discover() -> list[Path]:
     return files
 
 
+def _recorded(conn: psycopg.Connection[Any]) -> dict[str, str]:
+    return dict(conn.execute("SELECT version, checksum FROM schema_migration").fetchall())
+
+
+def count(conn: psycopg.Connection[Any], sql: str) -> int:
+    row = conn.execute(sql).fetchone()
+    assert row is not None
+    return int(row[0])
+
+
 def checksum(path: Path) -> str:
     # Text mode with a normalized line ending: the repository is checked out with LF, but a Windows
     # editor that rewrites the file as CRLF must not read as a tampered migration.
@@ -58,7 +69,7 @@ def apply(dsn: str = DSN, quiet: bool = False) -> list[str]:
         conn.execute(TRACKING)
         conn.execute("SELECT pg_advisory_lock(%s)", (LOCK_KEY,))
         try:
-            recorded = dict(conn.execute("SELECT version, checksum FROM schema_migration").fetchall())
+            recorded = _recorded(conn)
 
             for path in discover():
                 version, digest = path.stem, checksum(path)
@@ -90,7 +101,7 @@ def apply(dsn: str = DSN, quiet: bool = False) -> list[str]:
 def status(dsn: str = DSN) -> int:
     with psycopg.connect(dsn, autocommit=True) as conn:
         conn.execute(TRACKING)
-        recorded = dict(conn.execute("SELECT version, checksum FROM schema_migration").fetchall())
+        recorded = _recorded(conn)
     pending = 0
     for path in discover():
         version = path.stem
@@ -125,13 +136,15 @@ def selftest(dsn: str = DSN) -> None:
         assert second == [], f"second run was not a no-op: {second}"
 
         with psycopg.connect(scratch_dsn, autocommit=True) as conn:
-            assert conn.execute("SELECT count(*) FROM tenant").fetchone()[0] == 1, "tenant missing"
-            assert conn.execute(
-                "SELECT count(*) FROM pg_extension WHERE extname = 'vector'"
-            ).fetchone()[0] == 1, "vector extension missing"
+            assert count(conn, "SELECT count(*) FROM tenant") == 1, "tenant missing"
+            assert count(conn, "SELECT count(*) FROM pg_extension WHERE extname = 'vector'") == 1, (
+                "vector extension missing"
+            )
 
             # An applied migration whose file has changed must stop the run, not be re-applied.
-            conn.execute("UPDATE schema_migration SET checksum = 'tampered' WHERE version = %s", (first[0],))
+            conn.execute(
+                "UPDATE schema_migration SET checksum = 'tampered' WHERE version = %s", (first[0],)
+            )
         try:
             apply(scratch_dsn, quiet=True)
         except MigrationError as exc:

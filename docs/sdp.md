@@ -131,15 +131,16 @@ flowchart LR
 
 #### M1. Foundations, 15 h
 
-Partially complete.
+Complete on the exit criteria. The continuous integration workflow has not yet executed on a
+runner, so it is written but not yet evidenced.
 
 | | |
 |---|---|
 | Objective | Eliminate the assumptions capable of invalidating the plan. Fix the decisions that are expensive to reverse |
 | Scope | Model selection spike; embedding spike; repository skeleton; datastore with vector extension and migrations; inference gateway with a fake implementation; deployment composition; continuous integration skeleton |
 | Exit criteria | A selected model produces schema-conformant plans at measured latency; embedding model and vector dimension fixed; container-to-host inference reachability verified |
-| Complete | Model selection spike complete: five candidates over twenty requirements, `gemma3:4b` selected. Embedding spike complete: `embeddinggemma` at 768 dimensions |
-| Outstanding | Continuous integration. The composition, the migration path and the inference gateway are in place; the api, worker and web services land with their code rather than as empty blocks |
+| Complete | Model selection spike: five candidates over twenty requirements, `gemma3:4b` selected. Embedding spike: `embeddinggemma` at 768 dimensions. Container-to-host reachability verified. Deployment composition, forward-only migrations, inference gateway with local and fake providers, and continuous integration gating lint, types, migrations and the gateway |
+| Outstanding | None. The api, worker and web services and their suites land in M2 |
 
 #### M2. Agent workflow, 32 h
 
@@ -520,3 +521,4 @@ None of this permits describing the system as self-training before a trained mod
 | 0.6 | 2026-09-09 | Laxmi Poudel | Deployment composition added for the datastore. M1 outstanding narrowed |
 | 0.7 | 2026-09-09 | Laxmi Poudel | Forward-only migration runner and the baseline migration added. NFR-33 has a mechanism |
 | 0.8 | 2026-09-09 | Laxmi Poudel | Inference gateway added with local and fake providers. M1 outstanding is continuous integration alone |
+| 0.9 | 2026-09-09 | Laxmi Poudel | Continuous integration added. M1 meets its exit criteria; the workflow itself is unrun |
