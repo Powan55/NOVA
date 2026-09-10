@@ -139,7 +139,7 @@ Partially complete.
 | Scope | Model selection spike; embedding spike; repository skeleton; datastore with vector extension and migrations; inference gateway with a fake implementation; deployment composition; continuous integration skeleton |
 | Exit criteria | A selected model produces schema-conformant plans at measured latency; embedding model and vector dimension fixed; container-to-host inference reachability verified |
 | Complete | Model selection spike complete: five candidates over twenty requirements, `gemma3:4b` selected. Embedding spike complete: `embeddinggemma` at 768 dimensions |
-| Outstanding | Gateway; continuous integration. The composition and the migration path hold the datastore; the api, worker and web services land with their code rather than as empty blocks |
+| Outstanding | Continuous integration. The composition, the migration path and the inference gateway are in place; the api, worker and web services land with their code rather than as empty blocks |
 
 #### M2. Agent workflow, 32 h
 
@@ -519,3 +519,4 @@ None of this permits describing the system as self-training before a trained mod
 | 0.5 | 2026-09-09 | Laxmi Poudel | G4 resolved by NOVA-SPK-003. R-09 closed. No entry condition remains open |
 | 0.6 | 2026-09-09 | Laxmi Poudel | Deployment composition added for the datastore. M1 outstanding narrowed |
 | 0.7 | 2026-09-09 | Laxmi Poudel | Forward-only migration runner and the baseline migration added. NFR-33 has a mechanism |
+| 0.8 | 2026-09-09 | Laxmi Poudel | Inference gateway added with local and fake providers. M1 outstanding is continuous integration alone |

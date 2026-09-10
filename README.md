@@ -5,8 +5,9 @@ your corrections as inspectable memory so it stops repeating the same mistakes.
 
 Inference runs on a local model by default. No requirement or test data leaves the machine.
 
-**Status: early implementation.** Document set, three research spikes, and the datastore
-foundation: deployment composition and forward-only migrations. No application services yet.
+**Status: early implementation.** Document set, three research spikes, and the foundations:
+deployment composition, forward-only migrations, and the inference gateway. No application services
+yet.
 
 ---
 
@@ -113,6 +114,21 @@ Migrations are forward-only and versioned ([NFR-33](docs/srs.md)). Applied files
 editing one after it has run is an error rather than a silent divergence; a mistake is corrected by
 a new migration. `--status` lists what is pending and changes nothing, `--selftest` exercises the
 runner against a scratch database it creates and drops. Requires `pip install -r requirements.txt`.
+
+## Checking inference
+
+```bash
+py -3 nova/inference.py --health
+```
+
+Reports whether the configured provider is reachable and holds the models it needs, naming the
+`ollama pull` for anything missing. `--selftest` exercises the gateway, including the local runtime
+when it is up.
+
+Three operations, `generate_structured`, `generate_text` and `embed`, over two providers: the local
+runtime, and a deterministic fake for integration tests. The gateway never substitutes one for the
+other. An unreachable local runtime is an error, because a silent fallback would move where data
+goes without anyone deciding to.
 
 ## Building the documents
 
