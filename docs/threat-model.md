@@ -253,7 +253,7 @@ Every threat maps to a test. The mapping is maintained in
 | Note | Detail |
 |---|---|
 | Service binding | Loopback only. No reason exists to expose a local single-user application to a network segment |
-| Host inference | The inference runtime is host-resident rather than containerized. GPU passthrough on this platform adds operational friction without benefit. The container-to-host path requires verification and documentation |
+| Host inference | The inference runtime is host-resident rather than containerized. GPU passthrough on this platform adds operational friction without benefit. The container-to-host path is verified and stays on the loopback binding: containers reach it through Docker Desktop's host proxy, so no interface is widened and SA-5 holds for the inference runtime. [NOVA-SPK-003](spikes/2026-09-09-container-to-host-reachability.md) |
 | GPU contention | Endpoint protection software on the development workstation holds GPU memory, reducing available VRAM below nominal. Recorded so that measurements taken here remain interpretable elsewhere |
 
 ---
@@ -263,3 +263,4 @@ Every threat maps to a test. The mapping is maintained in
 | Version | Date | Author | Change |
 |---|---|---|---|
 | 0.1 | 2026-09-08 | Laxmi Poudel | Initial draft |
+| 0.2 | 2026-09-09 | Laxmi Poudel | Section 11 records the verified container-to-host path. The inference runtime stays on loopback, so no binding is widened |

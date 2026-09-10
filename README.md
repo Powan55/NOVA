@@ -5,7 +5,8 @@ your corrections as inspectable memory so it stops repeating the same mistakes.
 
 Inference runs on a local model by default. No requirement or test data leaves the machine.
 
-**Status: planning.** Document set and three research spikes. No application code yet.
+**Status: early implementation.** Document set, three research spikes, and the datastore
+foundation: deployment composition and forward-only migrations. No application services yet.
 
 ---
 
@@ -101,6 +102,17 @@ unchanged, because a local single-user deployment on loopback gains nothing from
 The application services join this file as their code lands. Inference is deliberately absent from
 it: it runs on the host, and containers reach it at `host.docker.internal`
 ([NOVA-SPK-003](docs/spikes/2026-09-09-container-to-host-reachability.md)).
+
+Then apply the schema:
+
+```bash
+py -3 db/migrate.py
+```
+
+Migrations are forward-only and versioned ([NFR-33](docs/srs.md)). Applied files are checksummed, so
+editing one after it has run is an error rather than a silent divergence; a mistake is corrected by
+a new migration. `--status` lists what is pending and changes nothing, `--selftest` exercises the
+runner against a scratch database it creates and drops. Requires `pip install -r requirements.txt`.
 
 ## Building the documents
 
