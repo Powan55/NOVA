@@ -65,3 +65,6 @@ jobs:
 
       - name: Inference gateway
         run: python nova/inference.py --selftest
+
+      - name: Task lifecycle
+        run: python nova/tasks.py --selftest
