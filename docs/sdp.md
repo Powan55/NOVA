@@ -131,8 +131,7 @@ flowchart LR
 
 #### M1. Foundations, 15 h
 
-Complete on the exit criteria. The continuous integration workflow has not yet executed on a
-runner, so it is written but not yet evidenced.
+Complete, 2026-09-10.
 
 | | |
 |---|---|
@@ -522,3 +521,4 @@ None of this permits describing the system as self-training before a trained mod
 | 0.7 | 2026-09-09 | Laxmi Poudel | Forward-only migration runner and the baseline migration added. NFR-33 has a mechanism |
 | 0.8 | 2026-09-09 | Laxmi Poudel | Inference gateway added with local and fake providers. M1 outstanding is continuous integration alone |
 | 0.9 | 2026-09-09 | Laxmi Poudel | Continuous integration added. M1 meets its exit criteria; the workflow itself is unrun |
+| 1.0 | 2026-09-10 | Laxmi Poudel | Continuous integration green on its first run. M1 complete |

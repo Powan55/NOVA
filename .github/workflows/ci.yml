@@ -40,9 +40,9 @@ jobs:
 
     steps:
       # Tag-pinned rather than SHA-pinned. Dependency and supply-chain hardening is M6 (T21).
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
           cache: pip
