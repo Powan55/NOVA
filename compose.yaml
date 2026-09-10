@@ -1,0 +1,33 @@
+# Deployment composition. NFR-32: `docker compose up -d` from a clean checkout.
+#
+# The api, worker and web services land with their code. A service block pointing at a Dockerfile
+# that does not exist yet would break the one command this file exists to provide.
+#
+# Inference is not here by design: it runs on the host and containers reach it at
+# host.docker.internal, verified in NOVA-SPK-003.
+
+services:
+  db:
+    # Digest-pinned. The tag moves; the thing that was tested does not. NOVA-SPK-003 follow-up 3.
+    image: pgvector/pgvector:pg17@sha256:cf134a767f474095eeba57e0117be8e568e011a63f33fbf252f14c9b760f8e6f
+    environment:
+      POSTGRES_DB: nova
+      POSTGRES_USER: nova
+      # Loopback-only, single user, host access assumed equivalent to user access (NOVA-TM-001 T2,
+      # SA-5). A default keeps NFR-32 to one command; override in .env for anything else.
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-nova}
+    ports:
+      # Bound to loopback, not 0.0.0.0. Exposed at all so migrations and psql run from the host.
+      - "127.0.0.1:${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U nova -d nova"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+      start_period: 10s
+    restart: unless-stopped
+
+volumes:
+  pgdata:

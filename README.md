@@ -88,6 +88,20 @@ becomes a removed claim, not a softened one.**
 Measured figures are stated with their method, sample size, and reference hardware. A figure without
 that qualification is not reproducible and is therefore not a claim.
 
+## Running the datastore
+
+```bash
+docker compose up -d
+```
+
+Brings up PostgreSQL with `pgvector`, on a named volume, bound to `127.0.0.1:5432`. The image is
+pinned by digest. `POSTGRES_PASSWORD` and `POSTGRES_PORT` are overridable; the defaults work
+unchanged, because a local single-user deployment on loopback gains nothing from a setup step.
+
+The application services join this file as their code lands. Inference is deliberately absent from
+it: it runs on the host, and containers reach it at `host.docker.internal`
+([NOVA-SPK-003](docs/spikes/2026-09-09-container-to-host-reachability.md)).
+
 ## Building the documents
 
 ```powershell
