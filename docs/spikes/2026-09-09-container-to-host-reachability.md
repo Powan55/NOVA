@@ -31,7 +31,7 @@ indexed is not a decision.
 |---|---|
 | OS | Windows 11 Home 10.0.26200 |
 | Container runtime | Docker Desktop, Linux engine, server 29.7.2 (linux/amd64), Compose 5.5.1 |
-| Datastore image | `pgvector/pgvector:pg17`, digest `sha256:cf134a76…f8e6f`, pgvector 0.8.6 |
+| Datastore image | `pgvector/pgvector:pg17`, digest `sha256:cf134a767f474095eeba57e0117be8e568e011a63f33fbf252f14c9b760f8e6f`, pgvector 0.8.6 |
 | Inference runtime | Ollama 0.33.3, host install, default binding `127.0.0.1:11434` |
 
 ## Method

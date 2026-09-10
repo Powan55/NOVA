@@ -1,6 +1,3 @@
-# Local agent and editor tooling - not committed
-.claude/
-
 # Secrets
 .env
 .env.*

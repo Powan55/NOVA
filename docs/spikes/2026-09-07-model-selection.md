@@ -77,7 +77,7 @@ what it showed.
 
 Raw per-requirement output: [`artifacts/run-log-2026-09-07.txt`](artifacts/run-log-2026-09-07.txt).
 
-Three individual results worth noting:
+Three individual results:
 
 - `gemma3:4b` took 115.1 s on its first call. That's cold model load, not generation. Warm calls for
   the same model ran 18 to 21 s. Cold load is a real UX and evaluation-runtime cost and has to be
